@@ -8,7 +8,7 @@ public interface GenericRepository<T> {
 
     T update(T entity);
 
-    T get(Integer id);
+    T get(Object id);
 
     void delete(Object id);
 

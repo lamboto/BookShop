@@ -5,6 +5,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users", schema = "book_shop")
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "select u from User u"),
+        @NamedQuery(name = "User.count",query = "select count(u.userId) from User u")
+})
 public class User {
     private int userId;
     private String email;

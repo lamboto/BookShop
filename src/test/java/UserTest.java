@@ -8,10 +8,11 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 
+import java.util.List;
 
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UserTest {
 
@@ -42,6 +43,54 @@ public class UserTest {
 
 
         assertTrue(user.getUserId() > 0);
+    }
+
+    @Test
+    public void testIfEntityExist() {
+        int userId = 1;
+        User user = userRepository.get(userId);
+
+        assertNotNull(user);
+    }
+
+    @Test
+    public void testIfGetUserNotFound() {
+        int userId = 99;
+        User user = userRepository.get(userId);
+
+        assertNull(user);
+    }
+
+    @Test
+    public void testDeleteUser() {
+        int userId = 2;
+
+        userRepository.delete(userId);
+        User user = userRepository.get(userId);
+        assertNull(user);
+    }
+
+    @Test(expected = Exception.class)
+    public void testDeleteNonExistUser() {
+        int userId = 99;
+
+        userRepository.delete(userId);
+        User user = userRepository.get(userId);
+        assertNull(user);
+    }
+
+    @Test
+    public void testFindAllUsers() {
+        List<User> users = userRepository.listAll();
+
+        assertTrue(users.size() > 0);
+    }
+
+    @Test
+    public void testCountAllUsers() {
+        long size = userRepository.count();
+
+        assertEquals(2, size);
     }
 
     @AfterClass
