@@ -22,7 +22,7 @@
     <h3><a href="">Create new User</a></h3>
 </div>
 <div align="center">
-    <table border="1">
+    <table border="1" cellpadding="5">
         <tr>
             <th>Index</th>
             <th>Id</th>

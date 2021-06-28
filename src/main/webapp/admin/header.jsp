@@ -12,17 +12,19 @@
         <img src="/resources/images/BookstoreLogo%20(1).png" alt="Book store logo">
     </div>
     <div>
+        <br/>
         Welcome Admin, Admin | <a href="/logout">Logout</a>
         <br/>
     </div>
     <div>
+        <br/>
         <b>
-            <a href="users">Users</a>
-            <a href="categories">Categories</a>
-            <a href="books">Books</a>
-            <a href="customers">Customers</a>
-            <a href="reviews">Reviews</a>
-            <a href="orders">Orders</a>
+            <a href="users">Users</a> &nbsp;
+            <a href="categories">Categories</a> &nbsp;
+            <a href="books">Books</a> &nbsp;
+            <a href="customers">Customers</a> &nbsp;
+            <a href="reviews">Reviews</a> &nbsp;
+            <a href="orders">Orders</a> &nbsp;
         </b>
     </div>
 </div>
