@@ -10,6 +10,7 @@ public interface UserService {
 
     void createUser(String email,String password,String fullName) throws Exception;
 
+    void updateUser(int id,String email,String password,String fullName) throws Exception;
     UserServiceModel findUserByEmail(String email);
     User getById(int id);
 }

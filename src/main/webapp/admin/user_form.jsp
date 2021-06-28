@@ -36,7 +36,7 @@
             <table>
 
                 <c:if test="${user != null}">
-                    <input type="hidden" name="id" value="<c:out value='${user.userId}'/>"/>
+                    <input type="hidden" name="userId" value="<c:out value='${user.userId}'/>"/>
                 </c:if>
                 <tr>
                     <td>Email:</td>

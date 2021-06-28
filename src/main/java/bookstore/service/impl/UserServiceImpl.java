@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(String email, String password, String fullName) throws Exception {
         User user = this.userRepository.findUserByEmail(email);
-        if (user != null){
+        if (user != null) {
             throw new Exception("User cannot be created.User with this email already exist!");
         }
 
@@ -47,6 +47,21 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.create(mapper.map(userServiceModel, User.class));
     }
+
+    @Override
+    public void updateUser(int id, String email, String password, String fullName) throws Exception {
+        User user = this.userRepository.findUserByEmail(email);
+
+
+        UserServiceModel userServiceModel = new UserServiceModel();
+        userServiceModel.setUserId(id);
+        userServiceModel.setEmail(email);
+        userServiceModel.setPassword(password);
+        userServiceModel.setFullName(fullName);
+
+        this.userRepository.update(mapper.map(userServiceModel, User.class));
+    }
+
 
     @Override
     public UserServiceModel findUserByEmail(String email) {
