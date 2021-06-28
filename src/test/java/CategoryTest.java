@@ -1,5 +1,4 @@
-import bookstore.entitites.Category;
-import bookstore.entitites.User;
+import bookstore.domain.entitites.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

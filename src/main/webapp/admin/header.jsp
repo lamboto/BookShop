@@ -19,7 +19,7 @@
     <div>
         <br/>
         <b>
-            <a href="users">Users</a> &nbsp;
+            <a href="list_users">Users</a> &nbsp;
             <a href="categories">Categories</a> &nbsp;
             <a href="books">Books</a> &nbsp;
             <a href="customers">Customers</a> &nbsp;

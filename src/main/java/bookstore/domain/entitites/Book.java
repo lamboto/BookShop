@@ -1,4 +1,4 @@
-package bookstore.entitites;
+package bookstore.domain.entitites;
 
 import javax.persistence.*;
 import java.sql.Date;

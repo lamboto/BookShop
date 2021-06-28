@@ -1,6 +1,5 @@
-import bookstore.entitites.User;
+import bookstore.domain.entitites.User;
 import bookstore.repository.UserRepository;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 
 import java.util.List;
 

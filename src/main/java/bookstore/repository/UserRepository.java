@@ -1,6 +1,6 @@
 package bookstore.repository;
 
-import bookstore.entitites.User;
+import bookstore.domain.entitites.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

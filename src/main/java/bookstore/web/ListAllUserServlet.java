@@ -1,6 +1,6 @@
 package bookstore.web;
 
-import bookstore.entitites.User;
+import bookstore.domain.entitites.User;
 import bookstore.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
