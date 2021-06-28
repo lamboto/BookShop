@@ -45,8 +45,9 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
         return super.count("User.count");
     }
 
-    public User findUserByEmail() {
+    public User findUserByEmail(String email) {
         Query query = this.entityManager.createNamedQuery("User.findByEmail");
+        query.setParameter("email",email);
         return (User) query.getSingleResult();
     }
 }

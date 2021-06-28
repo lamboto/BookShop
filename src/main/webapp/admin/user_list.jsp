@@ -26,6 +26,9 @@
     <h3><a href="user_form.jsp">Create new User</a></h3>
 </div>
 <div align="center">
+
+</div>
+<div align="center">
     <table border="1" cellpadding="5">
         <tr>
             <th>Index</th>
@@ -41,8 +44,9 @@
                 <td>${user.email}</td>
                 <td>${user.fullName}</td>
                 <td>
-                    <a href="">Edit</a> &nbsp;
-                    <a href="">Delete</a> &nbsp;
+                    <a href="/admin/edit_user?id=<c:out value='${user.userId}' />">Edit</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/admin/delete_user?id=<c:out value='${user.userId}' />">Delete</a>
                 </td>
             </tr>
         </c:forEach>

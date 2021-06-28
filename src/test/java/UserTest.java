@@ -91,6 +91,15 @@ public class UserTest {
         assertEquals(2, size);
     }
 
+    @Test
+    public void testUserCreateValidation(){
+        String email = "davd@abv.bg";
+
+        User user = userRepository.findUserByEmail(email);
+
+        assertNotNull(user);
+    }
+
     @AfterClass
     public static void tearDownClass() {
 
