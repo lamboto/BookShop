@@ -67,5 +67,6 @@ public class JpaRepository<T> {
 
         return (long) query.getSingleResult();
     }
+
 }
 

@@ -11,6 +11,10 @@
 <html>
 <head>
     <title>Manage users - Bookstore Administration</title>
+    <style><%@include file="/resources/css/bootstrap.min.css" %></style>
+    <style><%@include file="/resources/css/style.css" %></style>
+    <script><%@include file="/resources/js/jquery-3.6.0.min.js" %></script>
+    <script><%@include file="/resources/js/bootstrap.min.js" %></script>
 </head>
 <body>
 <header>
@@ -19,7 +23,7 @@
 
 <div align="center">
     <h2>User Management</h2>
-    <h3><a href="">Create new User</a></h3>
+    <h3><a href="user_form.jsp">Create new User</a></h3>
 </div>
 <div align="center">
     <table border="1" cellpadding="5">

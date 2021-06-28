@@ -7,7 +7,8 @@ import java.util.Objects;
 @Table(name = "users", schema = "book_shop")
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "select u from User u"),
-        @NamedQuery(name = "User.count",query = "select count(u.userId) from User u")
+        @NamedQuery(name = "User.count",query = "select count(u.userId) from User u"),
+        @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email")
 })
 public class User {
     private int userId;

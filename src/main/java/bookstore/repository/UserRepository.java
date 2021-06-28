@@ -3,6 +3,7 @@ package bookstore.repository;
 import bookstore.entitites.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -42,5 +43,10 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
     @Override
     public long count() {
         return super.count("User.count");
+    }
+
+    public User findUserByEmail() {
+        Query query = this.entityManager.createNamedQuery("User.findByEmail");
+        return (User) query.getSingleResult();
     }
 }
