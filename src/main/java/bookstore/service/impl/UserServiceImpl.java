@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class  UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
     private final EntityManagerFactory entityManagerFactory;
     private final EntityManager entityManager;
     private final UserRepository userRepository;
@@ -35,17 +35,18 @@ public class  UserServiceImpl implements UserService {
 
     @Override
     public void createUser(String email, String password, String fullName) throws Exception {
-       // if (!userValidationService.canCreateUser(email)) {
-       //     throw new Exception("User cannot be created");
-       // }
+        if (userValidationService.canCreateUser(email)) {
 
-        UserServiceModel userServiceModel = new UserServiceModel();
-        userServiceModel.setEmail(email);
-        userServiceModel.setPassword(password);
-        userServiceModel.setFullName(fullName);
+            UserServiceModel userServiceModel = new UserServiceModel();
+            userServiceModel.setEmail(email);
+            userServiceModel.setPassword(password);
+            userServiceModel.setFullName(fullName);
+            this.userRepository.create(mapper.map(userServiceModel, User.class));
+        } else {
+            throw new Exception("User cannot be created");
+        }
 
 
-        this.userRepository.create(mapper.map(userServiceModel, User.class));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class  UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(int id, String email, String password, String fullName) throws Exception {
-       // User user = this.userRepository.findUserByEmail(email);
+        // User user = this.userRepository.findUserByEmail(email);
 
 
         UserServiceModel userServiceModel = new UserServiceModel();

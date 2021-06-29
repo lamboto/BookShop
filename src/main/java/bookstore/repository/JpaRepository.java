@@ -60,6 +60,12 @@ public class JpaRepository<T> {
         return query.getResultList();
     }
 
+    public List<T> findWithNamedQuery(String queryName,String paramName,Object paramValue) {
+        Query query = entityManager.createNamedQuery(queryName);
+        query.setParameter(paramName,paramValue);
+        return query.getResultList();
+    }
+
 
     public long count(String queryName) {
         Query query = this.entityManager.createNamedQuery(queryName);

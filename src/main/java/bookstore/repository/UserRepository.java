@@ -35,10 +35,10 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
         super.delete(User.class, id);
     }
 
-   @Override
-   public List<User> listAll() {
-       return super.listAll("User.findAll");
-   }
+    @Override
+    public List<User> listAll() {
+        return super.listAll("User.findAll");
+    }
 
 
     @Override
@@ -47,8 +47,10 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
     }
 
     public User findUserByEmail(String email) {
-        Query query = this.entityManager.createNamedQuery("User.findByEmail");
-        query.setParameter("email",email);
-        return (User) query.getSingleResult();
+        List<User> listUsers = super.findWithNamedQuery("User.findByEmail", "email", email);
+        if (listUsers != null && listUsers.size() > 0) {
+            return listUsers.get(0);
+        }
+        return null;
     }
 }
