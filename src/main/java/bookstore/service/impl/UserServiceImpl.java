@@ -12,11 +12,12 @@ import javax.persistence.Persistence;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserServiceImpl implements UserService {
+public class  UserServiceImpl implements UserService {
     private final EntityManagerFactory entityManagerFactory;
     private final EntityManager entityManager;
     private final UserRepository userRepository;
     private final Mapper mapper = new Mapper();
+    private final UserValidationServiceImpl userValidationService = new UserValidationServiceImpl();
 
     public UserServiceImpl() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
@@ -34,10 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(String email, String password, String fullName) throws Exception {
-        User user = this.userRepository.findUserByEmail(email);
-        if (user != null) {
-            throw new Exception("User cannot be created.User with this email already exist!");
-        }
+       // if (!userValidationService.canCreateUser(email)) {
+       //     throw new Exception("User cannot be created");
+       // }
 
         UserServiceModel userServiceModel = new UserServiceModel();
         userServiceModel.setEmail(email);
@@ -49,8 +49,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(int id) {
+        User user = this.userRepository.get(id);
+        this.userRepository.delete(user);
+    }
+
+    @Override
     public void updateUser(int id, String email, String password, String fullName) throws Exception {
-        User user = this.userRepository.findUserByEmail(email);
+       // User user = this.userRepository.findUserByEmail(email);
 
 
         UserServiceModel userServiceModel = new UserServiceModel();
@@ -61,7 +67,6 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.update(mapper.map(userServiceModel, User.class));
     }
-
 
     @Override
     public UserServiceModel findUserByEmail(String email) {

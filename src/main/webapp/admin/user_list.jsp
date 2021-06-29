@@ -11,10 +11,7 @@
 <html>
 <head>
     <title>Manage users - Bookstore Administration</title>
-    <style><%@include file="/resources/css/bootstrap.min.css" %></style>
-    <style><%@include file="/resources/css/style.css" %></style>
-    <script><%@include file="/resources/js/jquery-3.6.0.min.js" %></script>
-    <script><%@include file="/resources/js/bootstrap.min.js" %></script>
+
 </head>
 <body>
 <header>
@@ -23,7 +20,7 @@
 
 <div align="center">
     <h2>User Management</h2>
-    <h3><a href="user_form.jsp">Create new User</a></h3>
+    <h3><a href="create_user">Create new User</a></h3>
 </div>
 <div align="center">
 
@@ -44,9 +41,9 @@
                 <td>${user.email}</td>
                 <td>${user.fullName}</td>
                 <td>
-                    <a href="/admin/edit_user?id=<c:out value='${user.userId}' />">Edit</a>
+                    <a href="edit_user?id=<c:out value='${user.userId}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/admin/delete_user?id=<c:out value='${user.userId}' />">Delete</a>
+                    <a href="javascript:confirmDelete(${user.userId})">Delete</a>
                 </td>
             </tr>
         </c:forEach>
@@ -57,4 +54,11 @@
     <jsp:directive.include file="footer.jsp"/>
 </footer>
 </body>
+<script>
+    function confirmDelete(userId) {
+     if (confirm("Are you sure you want to delete the user with ID "+userId+"?")){
+         window.location='delete_user?id='+userId;
+     }
+    }
+</script>
 </html>

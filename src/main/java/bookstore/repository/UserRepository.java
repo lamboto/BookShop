@@ -35,10 +35,11 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
         super.delete(User.class, id);
     }
 
-    @Override
-    public List<User> listAll() {
-        return super.listAll("User.findAll");
-    }
+   @Override
+   public List<User> listAll() {
+       return super.listAll("User.findAll");
+   }
+
 
     @Override
     public long count() {

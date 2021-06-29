@@ -24,11 +24,13 @@ public class ListAllUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<UserServiceModel> aLlUsers = userService.findALl();
+        List<UserServiceModel> aLlUsers = this.userService.findALl();
+
 
         List<ListAllUserViewModel> allUsersModel = aLlUsers.stream().map(e -> this.mapper.map(e, ListAllUserViewModel.class))
                 .collect(Collectors.toList());
 
+        req.setAttribute("listUsers", null);
         req.setAttribute("listUsers", allUsersModel);
 
 

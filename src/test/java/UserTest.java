@@ -32,8 +32,8 @@ public class UserTest {
 
         User user = new User();
 
-        user.setEmail("davd@abv.bg");
-        user.setFullName("Stoyan Kolev");
+        user.setEmail("migos@abv.bg");
+        user.setFullName("Quavo Huncho");
         user.setPassword("asdasdasd");
 
 
@@ -93,12 +93,13 @@ public class UserTest {
 
     @Test
     public void testUserCreateValidation(){
-        String email = "davd@abv.bg";
+        String email = "migos@abv.bg";
 
         User user = userRepository.findUserByEmail(email);
 
         assertNotNull(user);
     }
+
 
     @AfterClass
     public static void tearDownClass() {

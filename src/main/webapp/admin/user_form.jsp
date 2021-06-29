@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Create User - Bookstore Administration</title>
+    <title> Bookstore Administration</title>
 </head>
 <body>
 <header>
@@ -28,7 +28,7 @@
 <br>
 <div align="center">
     <c:if test="${user != null}">
-    <form action="update_user" method="post" onsubmit="return validateInputForm()">
+    <form action="edit_user" method="post" onsubmit="return validateInputForm()">
         </c:if>
         <c:if test="${user == null}">
         <form action="create_user" method="post" onsubmit="return validateInputForm()">

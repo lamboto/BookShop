@@ -22,7 +22,7 @@ public class JpaRepository<T> {
 
         this.entityManager.persist(entity);
         this.entityManager.flush();
-
+        this.entityManager.refresh(entity);
         this.entityManager.getTransaction().commit();
 
         return entity;
@@ -31,9 +31,7 @@ public class JpaRepository<T> {
 
     public T update(T entity) {
         this.entityManager.getTransaction().begin();
-
-        this.entityManager.merge(entity);
-
+        entity = this.entityManager.merge(entity);
         this.entityManager.getTransaction().commit();
 
         return entity;
