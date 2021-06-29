@@ -38,13 +38,11 @@ public class EditUserServlet extends HttpServlet {
         String password = req.getParameter("password");
         String fullName = req.getParameter("fullname");
 
-
         try {
             this.userService.updateUser(userId, email, password, fullName);
             resp.sendRedirect("/admin/list_users");
         } catch (Exception e) {
-            e.printStackTrace();
+            resp.sendRedirect("/admin/update_user");
         }
-
     }
 }

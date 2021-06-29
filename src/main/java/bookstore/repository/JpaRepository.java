@@ -32,6 +32,7 @@ public class JpaRepository<T> {
     public T update(T entity) {
         this.entityManager.getTransaction().begin();
         entity = this.entityManager.merge(entity);
+
         this.entityManager.getTransaction().commit();
 
         return entity;

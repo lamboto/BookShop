@@ -18,19 +18,20 @@ import java.util.stream.Collectors;
 @WebServlet("/admin/list_users")
 public class ListAllUserServlet extends HttpServlet {
 
-    private final UserServiceImpl userService = new UserServiceImpl();
     private final Mapper mapper = new Mapper();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserServiceImpl userService = new UserServiceImpl();
 
-        List<UserServiceModel> aLlUsers = this.userService.findALl();
+        List<UserServiceModel> aLlUsers = userService.findALl();
 
 
         List<ListAllUserViewModel> allUsersModel = aLlUsers.stream().map(e -> this.mapper.map(e, ListAllUserViewModel.class))
                 .collect(Collectors.toList());
 
-        req.setAttribute("listUsers", null);
+
         req.setAttribute("listUsers", allUsersModel);
 
 
