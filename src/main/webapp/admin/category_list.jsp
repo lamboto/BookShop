@@ -20,7 +20,7 @@
 
 <div align="center">
     <h2>Category Management</h2>
-    <h3><a href="create_user">Create new Category</a></h3>
+    <h3><a href="create_category">Create new Category</a></h3>
 </div>
 <div align="center">
 
@@ -39,7 +39,7 @@
                 <td>${category.categoryId}</td>
                 <td>${category.name}</td>
                 <td>
-                    <a href="edit_user?id=<c:out value='${category.categoryId}' />">Edit</a>
+                    <a href="edit_category?id=<c:out value='${category.categoryId}' />">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="javascript:confirmDelete(${category.categoryId})">Delete</a>
                 </td>
