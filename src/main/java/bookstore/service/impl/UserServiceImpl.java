@@ -51,8 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int id) {
-        this.userRepository.delete(id);
+    public void delete(int id) throws Exception {
+        if (userValidationService.isIdValid(id)){
+            this.userRepository.delete(id);
+        }else {
+            throw new Exception("User cannot be deleted");
+        }
+
     }
 
     @Override

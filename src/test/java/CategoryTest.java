@@ -1,25 +1,63 @@
 import bookstore.domain.entitites.Category;
+import bookstore.domain.entitites.User;
+import bookstore.repository.CategoryRepository;
+import bookstore.repository.UserRepository;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import static org.junit.Assert.*;
 
 public class CategoryTest {
-    public static void main(String[] args) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+    private static EntityManagerFactory entityManagerFactory;
+    private static EntityManager entityManager;
+    private static CategoryRepository categoryRepository;
+
+
+    @BeforeClass
+    public static void setupClass() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
+        entityManager = entityManagerFactory.createEntityManager();
+
+        categoryRepository = new CategoryRepository(entityManager);
+    }
+
+    @Test
+    public void testCreateCategory() {
         Category category = new Category();
+        category.setName("History");
 
-        category.setName("Drama");
+        categoryRepository.create(category);
 
+        assertTrue(category.getCategoryId() > 0);
+    }
 
+    @Test
+    public void testIfEntityExist() {
+        int categoryID = 1;
+        Category category = categoryRepository.get(categoryID);
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(category);
-        entityManager.getTransaction().commit();
+        assertNotNull(category);
+    }
+
+    @Test
+    public void testIfGetUserNotFound() {
+        int categoryId = 99;
+        Category category = categoryRepository.get(categoryId);
+
+        assertNull(category);
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+
         entityManager.close();
         entityManagerFactory.close();
     }
+
 }

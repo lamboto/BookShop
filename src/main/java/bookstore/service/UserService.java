@@ -9,7 +9,7 @@ public interface UserService {
 
     void createUser(String email, String password, String fullName) throws Exception;
 
-    void delete(int id);
+    void delete(int id) throws Exception;
 
     void updateUser(int id, String email, String password, String fullName) throws Exception;
 

@@ -35,14 +35,14 @@ public class CreateUserServlet extends HttpServlet {
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
                     .forward(req, resp);
-        } else {
-
-            try {
-                this.userService.createUser(email, password, fullname);
-                resp.sendRedirect("/admin/list_users");
-            } catch (Exception e) {
-                resp.sendRedirect("/admin/create_user");
-            }
         }
+
+        try {
+            this.userService.createUser(email, password, fullname);
+            resp.sendRedirect("/admin/list_users");
+        } catch (Exception e) {
+            resp.sendRedirect("/admin/create_user");
+        }
+
     }
 }

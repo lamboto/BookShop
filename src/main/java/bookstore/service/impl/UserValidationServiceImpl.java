@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import bookstore.domain.entitites.User;
 
 public class UserValidationServiceImpl implements UserValidationService {
@@ -37,6 +38,17 @@ public class UserValidationServiceImpl implements UserValidationService {
             Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 
             return matcher.find();
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isIdValid(int id) {
+        User user = this.userRepository.get(id);
+
+        if (user != null) {
+            return true;
         } else {
             return false;
         }

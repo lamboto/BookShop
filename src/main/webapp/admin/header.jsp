@@ -20,7 +20,7 @@
         <br/>
         <b>
             <a href="list_users">Users</a> &nbsp;
-            <a href="categories">Categories</a> &nbsp;
+            <a href="list_categories">Categories</a> &nbsp;
             <a href="book">Books</a> &nbsp;
             <a href="customers">Customers</a> &nbsp;
             <a href="reviews">Reviews</a> &nbsp;
