@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final EntityManager entityManager;
     private final UserRepository userRepository;
     private final Mapper mapper = new Mapper();
-    private final UserValidationServiceImpl userValidationService = new UserValidationServiceImpl();
+    private final ValidationServiceImpl userValidationService = new ValidationServiceImpl();
 
     public UserServiceImpl() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) throws Exception {
-        if (userValidationService.isIdValid(id)){
+        if (userValidationService.isUserIdValid(id)){
             this.userRepository.delete(id);
         }else {
             throw new Exception("User cannot be deleted");
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
             this.userRepository.update(mapper.map(userServiceModel, User.class));
         } else {
-            throw new Exception("User cannot be created");
+            throw new Exception("User cannot be updated");
         }
     }
 

@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final EntityManager entityManager;
     private final CategoryRepository categoryRepository;
     private final Mapper mapper = new Mapper();
-    private final UserValidationServiceImpl userValidationService = new UserValidationServiceImpl();
+    private final ValidationServiceImpl validationService = new ValidationServiceImpl();
 
     public CategoryServiceImpl() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
@@ -35,23 +35,35 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(String name) throws Exception {
-        CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
-        categoryServiceModel.setName(name);
+        if (this.validationService.canCreateUser(name)) {
 
-        this.categoryRepository.create(this.mapper.map(categoryServiceModel, Category.class));
+            CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
+            categoryServiceModel.setName(name);
+            this.categoryRepository.create(this.mapper.map(categoryServiceModel, Category.class));
+        } else {
+            throw new Exception("User cannot be created");
+        }
     }
 
     @Override
     public void delete(int id) throws Exception {
-        this.categoryRepository.delete(id);
+        if (validationService.isCategoryValid(id)){
+            this.categoryRepository.delete(id);
+        }else {
+            throw new Exception("Category cannot be deleted");
+        }
     }
 
     @Override
     public void updateCategory(int id, String name) throws Exception {
-        CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
-        categoryServiceModel.setCategoryId(id);
-        categoryServiceModel.setName(name);
-        this.categoryRepository.update(this.mapper.map(categoryServiceModel, Category.class));
+        if (this.validationService.canCreateUser(name)) {
+            CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
+            categoryServiceModel.setCategoryId(id);
+            categoryServiceModel.setName(name);
+            this.categoryRepository.update(this.mapper.map(categoryServiceModel, Category.class));
+        }else {
+            throw new Exception("User cannot be updated");
+        }
     }
 
     @Override
