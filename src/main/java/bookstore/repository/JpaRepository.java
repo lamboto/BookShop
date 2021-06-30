@@ -49,7 +49,6 @@ public class JpaRepository<T> {
 
         Object reference = entityManager.getReference(type, id);
         this.entityManager.remove(reference);
-
         entityManager.getTransaction().commit();
     }
 

@@ -1,5 +1,7 @@
 package bookstore.web;
 
+import bookstore.domain.entitites.User;
+import bookstore.domain.servicemodels.UserServiceModel;
 import bookstore.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -26,11 +28,21 @@ public class CreateUserServlet extends HttpServlet {
         String fullname = req.getParameter("fullname");
         String password = req.getParameter("password");
 
-        try {
-            this.userService.createUser(email, password, fullname);
-            resp.sendRedirect("/admin/list_users");
-        } catch (Exception e) {
-            resp.sendRedirect("/admin/create_user");
+        User userExist = this.userService.findUserByEmail(email);
+
+        if (userExist != null) {
+            String message = "Could not create user with this email.A user with email" + email + " already exists.";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("message.jsp")
+                    .forward(req, resp);
+        } else {
+
+            try {
+                this.userService.createUser(email, password, fullname);
+                resp.sendRedirect("/admin/list_users");
+            } catch (Exception e) {
+                resp.sendRedirect("/admin/create_user");
+            }
         }
     }
 }

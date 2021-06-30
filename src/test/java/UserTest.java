@@ -61,7 +61,7 @@ public class UserTest {
 
     @Test
     public void testDeleteUser() {
-        int userId = 2;
+        int userId = 3;
 
         userRepository.delete(userId);
         User user = userRepository.get(userId);

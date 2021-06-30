@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Manage users - Bookstore Administration</title>
+    <title>Manage user - Bookstore Administration</title>
 
 </head>
 <body>

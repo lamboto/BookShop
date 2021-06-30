@@ -2,14 +2,16 @@
 <persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence  	http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
+
     <persistence-unit name="book_shop" transaction-type="RESOURCE_LOCAL">
+        <class>bookstore.domain.entitites.Customer</class>
         <class>bookstore.domain.entitites.BookOrder</class>
         <class>bookstore.domain.entitites.Book</class>
         <class>bookstore.domain.entitites.Category</class>
-        <class>bookstore.domain.entitites.Customer</class>
         <class>bookstore.domain.entitites.OrdersDetail</class>
         <class>bookstore.domain.entitites.Review</class>
         <class>bookstore.domain.entitites.User</class>
+
 
         <properties>
             <property name = "hibernate.connection.url" value="jdbc:mysql://localhost:3306/book_shop?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>

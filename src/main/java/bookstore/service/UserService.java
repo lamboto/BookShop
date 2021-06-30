@@ -1,8 +1,7 @@
 package bookstore.service;
 
-import bookstore.domain.entitites.User;
 import bookstore.domain.servicemodels.UserServiceModel;
-
+import bookstore.domain.entitites.User;
 import java.util.List;
 
 public interface UserService {
@@ -14,7 +13,7 @@ public interface UserService {
 
     void updateUser(int id, String email, String password, String fullName) throws Exception;
 
-    UserServiceModel findUserByEmail(String email);
+    User findUserByEmail(String email);
 
     User getById(int id);
 }

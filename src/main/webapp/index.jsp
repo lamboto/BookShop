@@ -21,9 +21,9 @@
 
 <div align="center">
     <h3>Main content:</h3>
-    <h2>New books:</h2>
-    <h2>Best selling books:</h2>
-    <h2>Most-favored books:</h2>
+    <h2>New book:</h2>
+    <h2>Best selling book:</h2>
+    <h2>Most-favored book:</h2>
 </div>
 
 <footer>

@@ -1,15 +1,14 @@
 package bookstore.service.impl;
 
-import bookstore.domain.entitites.User;
 import bookstore.repository.UserRepository;
 import bookstore.service.UserValidationService;
-import config.Mapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import bookstore.domain.entitites.User;
 
 public class UserValidationServiceImpl implements UserValidationService {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -32,10 +31,9 @@ public class UserValidationServiceImpl implements UserValidationService {
     }
 
     private boolean isEmailValid(String email) {
-            User user = this.userRepository.findUserByEmail(email);
+        User user = this.userRepository.findUserByEmail(email);
 
-
-       if (user == null) {
+        if (user == null) {
             Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
 
             return matcher.find();

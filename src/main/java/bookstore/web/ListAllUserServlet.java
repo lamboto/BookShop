@@ -1,6 +1,5 @@
 package bookstore.web;
 
-import bookstore.domain.entitites.User;
 import bookstore.domain.servicemodels.UserServiceModel;
 import bookstore.domain.view.ListAllUserViewModel;
 import bookstore.service.impl.UserServiceImpl;
