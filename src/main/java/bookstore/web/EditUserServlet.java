@@ -42,10 +42,11 @@ public class EditUserServlet extends HttpServlet {
         User userById = this.userService.getById(userId);
         User userByEmail = this.userService.findUserByEmail(email);
 
+        String message = "";
 
         if (userByEmail != null && userById.getUserId() != userByEmail.getUserId()) {
 
-            String message = "Could not update user with this email: " + email + " because already exist!";
+            message = "Could not update user with this email: " + email + " because already exist!";
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
                     .forward(req, resp);
@@ -55,7 +56,10 @@ public class EditUserServlet extends HttpServlet {
                 this.userService.updateUser(userId, email, password, fullName);
                 resp.sendRedirect("/admin/list_users");
             } catch (Exception e) {
-                throw new IllegalArgumentException("Cannot update user");
+                message = "Could not find category with ID: " + userId;
+                req.setAttribute("message", message);
+                req.getRequestDispatcher("message.jsp")
+                        .forward(req, resp);
             }
         }
 

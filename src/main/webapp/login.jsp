@@ -10,10 +10,6 @@
 <html>
 <head>
     <title>Login</title>
-    <style><%@include file="/resources/css/bootstrap.min.css" %></style>
-    <style><%@include file="/resources/css/style.css" %></style>
-    <script><%@include file="/resources/js/jquery-3.6.0.min.js" %></script>
-    <script><%@include file="/resources/js/bootstrap.min.js" %></script>
 </head>
 <body>
 

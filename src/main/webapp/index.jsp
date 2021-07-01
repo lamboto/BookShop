@@ -10,14 +10,13 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>Index</title>
 </head>
 <body>
 
 <header>
-    <c:import url="navbar.jsp"/>
+    <jsp:directive.include file="navbar.jsp"/>
 </header>
-
 
 <div align="center">
     <h3>Main content:</h3>
@@ -27,7 +26,7 @@
 </div>
 
 <footer>
-    <c:import url="footer.jsp"/>
+    <jsp:directive.include file="footer.jsp"/>
 </footer>
 </body>
 </html>

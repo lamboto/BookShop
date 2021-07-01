@@ -41,8 +41,11 @@ public class EditCategoryServlet extends HttpServlet {
 
         Category categoryByName = this.categoryService.findCategoryByName(name);
 
+        String message ="";
+
+
         if (categoryByName != null) {
-            String message = "Could not update category with this name: " + name + " because already exist!";
+            message = "Could not update category with this name: " + name + " because already exist!";
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
                     .forward(req, resp);
@@ -52,7 +55,10 @@ public class EditCategoryServlet extends HttpServlet {
                 this.categoryService.updateCategory(id, name);
                 resp.sendRedirect("/admin/list_categories");
             } catch (Exception e) {
-                throw new IllegalArgumentException("Cannot update category");
+                message = "Could not find category with ID: " + id;
+                req.setAttribute("message", message);
+                req.getRequestDispatcher("message.jsp")
+                        .forward(req, resp);
             }
         }
     }
