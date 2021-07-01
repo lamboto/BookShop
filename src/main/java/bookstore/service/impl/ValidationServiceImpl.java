@@ -53,6 +53,23 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
+    public boolean canUpdateUser(int id, int otherId, String email) {
+        User user = this.userRepository.findUserByEmail(email);
+        User user1 = this.userRepository.get(id);
+
+        if (user == null) {
+            Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+
+            return matcher.find();
+        } else {
+            if (user1.getUserId() == otherId) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    @Override
     public boolean isUserIdValid(int id) {
         User user = this.userRepository.get(id);
 

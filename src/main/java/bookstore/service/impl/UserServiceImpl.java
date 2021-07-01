@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(String email, String password, String fullName) throws Exception {
+
         if (userValidationService.canCreateUser(email)) {
 
             UserServiceModel userServiceModel = new UserServiceModel();
@@ -52,9 +53,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) throws Exception {
-        if (userValidationService.isUserIdValid(id)){
+        if (userValidationService.isUserIdValid(id)) {
             this.userRepository.delete(id);
-        }else {
+        } else {
             throw new Exception("User cannot be deleted");
         }
 
@@ -62,8 +63,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(int id, String email, String password, String fullName) throws Exception {
-        if (userValidationService.canCreateUser(email)) {
-
 
             UserServiceModel userServiceModel = new UserServiceModel();
             userServiceModel.setUserId(id);
@@ -72,9 +71,7 @@ public class UserServiceImpl implements UserService {
             userServiceModel.setFullName(fullName);
 
             this.userRepository.update(mapper.map(userServiceModel, User.class));
-        } else {
-            throw new Exception("User cannot be updated");
-        }
+
     }
 
     @Override

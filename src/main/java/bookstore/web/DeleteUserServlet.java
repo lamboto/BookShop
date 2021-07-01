@@ -20,8 +20,6 @@ public class DeleteUserServlet extends HttpServlet {
         int userId = Integer.parseInt(req.getParameter("id"));
 
 
-
-
         try {
             this.userService.delete(userId);
             resp.sendRedirect("/admin/list_users");

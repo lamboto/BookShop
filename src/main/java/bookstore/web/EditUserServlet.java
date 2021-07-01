@@ -39,20 +39,25 @@ public class EditUserServlet extends HttpServlet {
         String password = req.getParameter("password");
         String fullName = req.getParameter("fullname");
 
-        User userExist = this.userService.findUserByEmail(email);
+        User userById = this.userService.getById(userId);
+        User userByEmail = this.userService.findUserByEmail(email);
 
-        if (userExist != null) {
+
+        if (userByEmail != null && userById.getUserId() != userByEmail.getUserId()) {
+
             String message = "Could not update user with this email: " + email + " because already exist!";
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
                     .forward(req, resp);
+
+        } else {
+            try {
+                this.userService.updateUser(userId, email, password, fullName);
+                resp.sendRedirect("/admin/list_users");
+            } catch (Exception e) {
+                resp.sendRedirect("/admin/edit_user");
+            }
         }
 
-        try {
-            this.userService.updateUser(userId, email, password, fullName);
-            resp.sendRedirect("/admin/list_users");
-        } catch (Exception e) {
-            resp.sendRedirect("/admin/update_user");
-        }
     }
 }

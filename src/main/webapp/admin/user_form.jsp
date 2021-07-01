@@ -28,16 +28,13 @@
 <br>
 <div align="center">
     <c:if test="${user != null}">
-    <form action="edit_user" method="post" onsubmit="return validateInputForm()">
+            <form action="edit_user" method="post" onsubmit="return validateInputForm()">
+                <input type="hidden" name="userId" value="${user.userId}">
         </c:if>
         <c:if test="${user == null}">
-        <form action="create_user" method="post" onsubmit="return validateInputForm()">
+                <form action="create_user" method="post" onsubmit="return validateInputForm()">
             </c:if>
             <table>
-
-                <c:if test="${user != null}">
-                    <input type="hidden" name="userId" value="<c:out value='${user.userId}'/>"/>
-                </c:if>
                 <tr>
                     <td>Email:</td>
                     <td><input type="text" name="email" id="email" size="20"
