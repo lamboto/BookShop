@@ -62,15 +62,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User login(String email, String password) {
+        boolean loginResult = this.userRepository.checkLogin(email, password);
+        if (loginResult) {
+            return this.userRepository.findUserByEmail(email);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public void updateUser(int id, String email, String password, String fullName) throws Exception {
 
-            UserServiceModel userServiceModel = new UserServiceModel();
-            userServiceModel.setUserId(id);
-            userServiceModel.setEmail(email);
-            userServiceModel.setPassword(password);
-            userServiceModel.setFullName(fullName);
+        UserServiceModel userServiceModel = new UserServiceModel();
+        userServiceModel.setUserId(id);
+        userServiceModel.setEmail(email);
+        userServiceModel.setPassword(password);
+        userServiceModel.setFullName(fullName);
 
-            this.userRepository.update(mapper.map(userServiceModel, User.class));
+        this.userRepository.update(mapper.map(userServiceModel, User.class));
 
     }
 

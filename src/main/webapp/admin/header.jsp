@@ -6,14 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
     <div>
         <img src="/resources/images/BookstoreLogo%20(1).png" alt="Book store logo">
     </div>
     <div>
+
         <br/>
-        Welcome Admin, Admin | <a href="/logout">Logout</a>
+        Welcome Admin, <c:out value="${userEmail}"/> | <a href="/logout">Logout</a>
         <br/>
     </div>
     <div>

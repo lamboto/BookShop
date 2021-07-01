@@ -5,6 +5,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class JpaRepository<T> {
 
@@ -59,12 +61,21 @@ public class JpaRepository<T> {
         return query.getResultList();
     }
 
-    public List<T> findWithNamedQuery(String queryName,String paramName,Object paramValue) {
+    public List<T> findWithNamedQuery(String queryName, String paramName, Object paramValue) {
         Query query = entityManager.createNamedQuery(queryName);
-        query.setParameter(paramName,paramValue);
+        query.setParameter(paramName, paramValue);
         return query.getResultList();
     }
 
+    public List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters) {
+        Query query = entityManager.createNamedQuery(queryName);
+        Set<Map.Entry<String, Object>> setParameters = parameters.entrySet();
+        for (Map.Entry<String, Object> entry : setParameters) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+
+        return query.getResultList();
+    }
 
     public long count(String queryName) {
         Query query = this.entityManager.createNamedQuery(queryName);

@@ -1,8 +1,12 @@
 package bookstore.repository;
 
 import javax.persistence.EntityManager;
+
 import bookstore.domain.entitites.User;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserRepository extends JpaRepository<User> implements GenericRepository<User> {
@@ -38,6 +42,16 @@ public class UserRepository extends JpaRepository<User> implements GenericReposi
         return super.listAll("User.findAll");
     }
 
+    public boolean checkLogin(String email, String password) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("email", email);
+        parameters.put("password", password);
+        List<User> listUsers = super.findWithNamedQuery("User.checkLogin", parameters);
+        if (listUsers.size() == 1) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public long count() {

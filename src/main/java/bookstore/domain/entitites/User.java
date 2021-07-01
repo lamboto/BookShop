@@ -8,10 +8,11 @@ import java.util.Objects;
 @Table(name = "users")
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "select u from User u"),
-        @NamedQuery(name = "User.count",query = "select count(u.userId) from User u"),
-        @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email")
+        @NamedQuery(name = "User.count", query = "select count(u.userId) from User u"),
+        @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email"),
+        @NamedQuery(name = "User.checkLogin", query = "select u from User u where u.email = :email and u.password = :password")
 })
-public class User{
+public class User {
     private int userId;
     private String email;
     private String fullName;
