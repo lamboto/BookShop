@@ -6,5 +6,5 @@ public interface ValidationService {
     boolean isUserIdValid(int id);
     boolean isCategoryNameExist(String name);
     boolean isCategoryValid(int id);
-    boolean canUpdateUser(int id,int otherId,String email);
+
 }

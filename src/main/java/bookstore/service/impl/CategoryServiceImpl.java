@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(String name) throws Exception {
-        if (this.validationService.canCreateUser(name)) {
+        if (this.validationService.canCreateCategory(name)) {
 
             CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
             categoryServiceModel.setName(name);
@@ -47,23 +47,21 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void delete(int id) throws Exception {
-        if (validationService.isCategoryValid(id)){
+        if (validationService.isCategoryValid(id)) {
             this.categoryRepository.delete(id);
-        }else {
+        } else {
             throw new Exception("Category cannot be deleted");
         }
     }
 
     @Override
     public void updateCategory(int id, String name) throws Exception {
-        if (this.validationService.canCreateUser(name)) {
+
             CategoryServiceModel categoryServiceModel = new CategoryServiceModel();
             categoryServiceModel.setCategoryId(id);
             categoryServiceModel.setName(name);
             this.categoryRepository.update(this.mapper.map(categoryServiceModel, Category.class));
-        }else {
-            throw new Exception("User cannot be updated");
-        }
+
     }
 
     @Override

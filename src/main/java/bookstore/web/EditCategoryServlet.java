@@ -39,11 +39,21 @@ public class EditCategoryServlet extends HttpServlet {
         String name = req.getParameter("name");
 
 
-        try {
-            this.categoryService.updateCategory(id, name);
-            resp.sendRedirect("/admin/list_categories");
-        } catch (Exception e) {
-            resp.sendRedirect("/admin/update_category");
+        Category categoryByName = this.categoryService.findCategoryByName(name);
+
+        if (categoryByName != null) {
+            String message = "Could not update category with this name: " + name + " because already exist!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("message.jsp")
+                    .forward(req, resp);
+        } else {
+
+            try {
+                this.categoryService.updateCategory(id, name);
+                resp.sendRedirect("/admin/list_categories");
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Cannot update category");
+            }
         }
     }
 }
