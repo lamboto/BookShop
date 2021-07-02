@@ -8,14 +8,21 @@ import java.util.Set;
 @Entity
 @Table(name = "categories", schema = "book_shop")
 @NamedQueries({
-        @NamedQuery(name = "Category.findAll", query = "select c from Category c"),
-        @NamedQuery(name = "Category.count",query = "select count(c.categoryId) from Category c"),
-        @NamedQuery(name = "Category.findByName",query = "select c from Category c where c.name = :name")
+        @NamedQuery(name = "Category.findAll", query = "select c from Category c order by c.name"),
+        @NamedQuery(name = "Category.count", query = "select count(c.categoryId) from Category c"),
+        @NamedQuery(name = "Category.findByName", query = "select c from Category c where c.name = :name")
 })
 public class Category {
     private int categoryId;
     private String name;
     private Set<Book> books;
+
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
 
     @Id
     @Column(name = "category_id")

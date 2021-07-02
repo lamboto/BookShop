@@ -12,8 +12,8 @@ public class Review {
     private String headline;
     private String comment;
     private Timestamp reviewTime;
-    private Book bookByBookId;
-    private Customer customerByCustomerId;
+    private Book book;
+    private Customer customer;
 
     @Id
     @Column(name = "review_id")
@@ -80,21 +80,21 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "book_id", nullable = false)
-    public Book getBooksByBookId() {
-        return bookByBookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBooksByBookId(Book bookByBookId) {
-        this.bookByBookId = bookByBookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    public Customer getCustomersByCustomerId() {
-        return customerByCustomerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomersByCustomerId(Customer customerByCustomerId) {
-        this.customerByCustomerId = customerByCustomerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

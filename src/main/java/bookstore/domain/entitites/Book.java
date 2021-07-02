@@ -1,19 +1,22 @@
 package bookstore.domain.entitites;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.sql.Timestamp;
+
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "books", schema = "book_shop")
 @NamedQueries({
         @NamedQuery(name = "Book.findAll", query = "select b from Book b"),
-        @NamedQuery(name = "Book.count",query = "select count(b.bookId) from Book b"),
+        @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
 })
-public class Book {
+public class Book implements Serializable {
     private int bookId;
     private String title;
     private String author;
@@ -22,10 +25,10 @@ public class Book {
     private byte[] image;
     private double price;
     private Date publishDate;
-    private Timestamp lastUpdateTime;
+    private Date lastUpdateTime;
     private Category category;
-    private Collection<OrdersDetail> ordersDetailByBookId;
-    private Collection<Review> reviewByBookId;
+    private Set<OrdersDetail> ordersDetails;
+    private Set<Review> reviews;
 
     @Id
     @Column(name = "book_id")
@@ -110,11 +113,11 @@ public class Book {
 
     @Basic
     @Column(name = "last_update_time")
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
@@ -143,21 +146,21 @@ public class Book {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "booksByBookId")
-    public Collection<OrdersDetail> getOrdersDetailsByBookId() {
-        return ordersDetailByBookId;
+    @OneToMany(mappedBy = "book")
+    public Set<OrdersDetail> getOrdersDetails() {
+        return ordersDetails;
     }
 
-    public void setOrdersDetailsByBookId(Collection<OrdersDetail> ordersDetailByBookId) {
-        this.ordersDetailByBookId = ordersDetailByBookId;
+    public void setOrdersDetails(Set<OrdersDetail> ordersDetails) {
+        this.ordersDetails = ordersDetails;
     }
 
-    @OneToMany(mappedBy = "booksByBookId")
-    public Collection<Review> getReviewsByBookId() {
-        return reviewByBookId;
+    @OneToMany(mappedBy = "book")
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
-    public void setReviewsByBookId(Collection<Review> reviewByBookId) {
-        this.reviewByBookId = reviewByBookId;
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 }

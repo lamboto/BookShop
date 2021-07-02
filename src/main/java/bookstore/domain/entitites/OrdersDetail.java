@@ -11,7 +11,7 @@ public class OrdersDetail {
     private int quantity;
     private double subtotal;
     private BookOrder bookOrderByOrderId;
-    private Book bookByBookId;
+    private Book book;
 
 
     @Id
@@ -70,11 +70,11 @@ public class OrdersDetail {
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    public Book getBooksByBookId() {
-        return bookByBookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBooksByBookId(Book bookByBookId) {
-        this.bookByBookId = bookByBookId;
+    public void setBook(Book bookByBookId) {
+        this.book = bookByBookId;
     }
 }

@@ -19,7 +19,7 @@ public class Customer {
     private String password;
     private Timestamp registerDate;
     private Collection<BookOrder> bookOrderByCustomerId;
-    private Collection<Review> reviewByCustomerId;
+    private Collection<Review> reviews;
 
     @Id
     @Column(name = "customer_id")
@@ -144,12 +144,12 @@ public class Customer {
         this.bookOrderByCustomerId = bookOrderByCustomerId;
     }
 
-    @OneToMany(mappedBy = "customersByCustomerId")
+    @OneToMany(mappedBy = "customer")
     public Collection<Review> getReviewsByCustomerId() {
-        return reviewByCustomerId;
+        return reviews;
     }
 
     public void setReviewsByCustomerId(Collection<Review> reviewByCustomerId) {
-        this.reviewByCustomerId = reviewByCustomerId;
+        this.reviews = reviewByCustomerId;
     }
 }

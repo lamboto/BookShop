@@ -4,15 +4,20 @@ import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.User;
 
 import javax.persistence.EntityManager;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-public class BookRepository extends JpaRepository<Book> implements GenericRepository<Book>{
+public class BookRepository extends JpaRepository<Book> implements GenericRepository<Book> {
 
     public BookRepository(EntityManager entityManager) {
         super(entityManager);
     }
+
     @Override
     public Book create(Book book) {
+        book.setLastUpdateTime(new Date());
         return super.create(book);
     }
 
@@ -20,9 +25,10 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
     public Book update(Book book) {
         return super.update(book);
     }
+
     @Override
     public Book get(Object bookId) {
-        return super.get(Book.class,bookId);
+        return super.get(Book.class, bookId);
     }
 
     @Override
