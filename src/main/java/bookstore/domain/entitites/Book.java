@@ -13,7 +13,8 @@ import java.util.Set;
 @Entity
 @Table(name = "books", schema = "book_shop")
 @NamedQueries({
-        @NamedQuery(name = "Book.findAll", query = "select b from Book b"),
+        @NamedQuery(name = "Book.findByTitle", query = "select b from Book b where b.title = :title"),
+        @NamedQuery(name = "Book.findAll", query = "select b from Book b order by b.title"),
         @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
 })
 public class Book implements Serializable {

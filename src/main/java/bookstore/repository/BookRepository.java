@@ -23,6 +23,7 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
 
     @Override
     public Book update(Book book) {
+        book.setLastUpdateTime(new Date());
         return super.update(book);
     }
 
@@ -34,6 +35,14 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
     @Override
     public void delete(Object id) {
         super.delete(Book.class, id);
+    }
+
+    public Book findByBookTitle(String title) {
+        List<Book> listBooks = super.findWithNamedQuery("Book.findByTitle", "title", title);
+        if (listBooks != null && listBooks.size() > 0) {
+            return listBooks.get(0);
+        }
+        return null;
     }
 
     @Override
