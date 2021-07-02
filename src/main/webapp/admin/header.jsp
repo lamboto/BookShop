@@ -14,7 +14,7 @@
     <div>
 
         <br/>
-        Welcome Admin, <c:out value="${userEmail}"/> | <a href="/logout">Logout</a>
+        Welcome Admin, <c:out value="${userEmail}"/> | <a href="logout">Logout</a>
         <br/>
     </div>
     <div>
