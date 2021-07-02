@@ -12,10 +12,16 @@
         <img src="/resources/images/BookstoreLogo%20(1).png" alt="Book store logo">
     </div>
     <div>
-
-        <br/>
-        Welcome Admin, <c:out value="${userEmail}"/> | <a href="logout">Logout</a>
-        <br/>
+        <c:if test="${userEmail != null}">
+            <br/>
+            Welcome Admin, <c:out value="${userEmail}"/> | <a href="logout">Logout</a>
+            <br/>
+        </c:if>
+        <c:if test="${userEmail == null}">
+            <br/>
+            <a href="login">Login</a>
+            <br/>
+        </c:if>
     </div>
     <div>
         <br/>
