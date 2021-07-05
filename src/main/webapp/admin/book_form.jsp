@@ -37,8 +37,8 @@
 
 <div align="center">
     <c:if test="${book != null}">
-    <form action="edit_book" method="post" onsubmit="return validateInputForm()">
-        <input type="hidden" name="bookId" value="${book.bookId}">
+    <form action="edit_book" enctype="multipart/form-data" method="post" onsubmit="">
+        <input type="hidden" name="bookId"  value="${book.bookId}">
         </c:if>
         <c:if test="${book == null}">
         <form action="create_book" enctype="multipart/form-data" method="post" onsubmit="return validateInputForm()">

@@ -22,7 +22,7 @@ public class EditUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id = Integer.parseInt(req.getParameter("bookId"));
         User user = this.userService.getById(id);
 
         EditUserViewModel editViewModel = this.mapper.map(user, EditUserViewModel.class);
