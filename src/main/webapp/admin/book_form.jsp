@@ -10,6 +10,13 @@
 <html>
 <head>
     <title> Bookstore Administration</title>
+    <link rel="stylesheet" href="../resources/css/jquery-ui.min.css">
+
+    <script type="text/javascript" src="../resources/css/jquery-ui.min.css"></script>
+    <script type="text/javascript" src="../resources/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <header>
@@ -34,7 +41,7 @@
         <input type="hidden" name="bookId" value="${book.bookId}">
         </c:if>
         <c:if test="${book == null}">
-        <form action="create_book" method="post" onsubmit="return validateInputForm()">
+        <form action="create_book" enctype="multipart/form-data" method="post" onsubmit="return validateInputForm()">
             </c:if>
             <table>
                 <tr>
@@ -67,18 +74,29 @@
                 </tr>
                 <tr>
                     <td>Publish Date:</td>
-                    <td><input type="date" name="publishDate" id="publishDate" size="20"
+                    <td><input type="text" name="publishDate" id="publishDate" size="20"
                                value="<c:out value='${book.publishDate}' />"></td>
+                </tr>
+                <tr>
+                    <td>Image:</td>
+                    <td>
+                        <input type="file" name="image" id="image" size="20"/>
+                        <img id="thumbnail" alt="Image Preview"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>Price:</td>
                     <td><input type="number" name="price" id="price" size="20"
                                value="<c:out value='${book.price}' />"></td>
                 </tr>
+
                 <tr>
                     <td>Description:</td>
-                    <td><input type="text" name="description" id="description" size="20"
-                               value="<c:out value='${book.description}' />"></td>
+                    <td>
+                        <textarea rows="5" cols="50" name="description" id="description">
+
+                        </textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
@@ -98,27 +116,23 @@
 </footer>
 </body>
 <script type="text/javascript">
-    function validateInputForm() {
-        let fieldEmail = document.getElementById("email");
-        let fieldFullname = document.getElementById("fullname");
-        let fieldPassowrd = document.getElementById("password");
+    $(document).ready(function () {
+        $('#publishDate').datepicker();
+        $('#book').change(function (){
+            showImageThumbnail(this);
+        })
+    });
 
-        if (fieldEmail.value.length === 0) {
-            alert("Email is required")
-            fieldEmail.focus();
-            return false;
-        }
-        if (fieldFullname.value.length === 0) {
-            alert("Fullname is required")
-            fieldEmail.focus();
-            return false;
-        }
-        if (fieldPassowrd.value.length === 0) {
-            alert("Passowrd is required")
-            fieldEmail.focus();
-            return false;
-        }
+
+    function showImageThumbnail(fileInput) {
+        let file = fileInput.files[0];
+
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#thumbnail').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
     }
-
 </script>
 </html>

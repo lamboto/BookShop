@@ -2,7 +2,10 @@ package bookstore.service.impl;
 
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
+import bookstore.domain.entitites.User;
 import bookstore.domain.servicemodels.BookServiceModel;
+import bookstore.domain.servicemodels.CategoryServiceModel;
+import bookstore.domain.servicemodels.UserServiceModel;
 import bookstore.repository.BookRepository;
 import bookstore.repository.UserRepository;
 import bookstore.service.BookService;
@@ -38,6 +41,22 @@ public class BookServiceImpl implements BookService {
     @Override
     public void createBook(Category category, String title, String author, String isbn, Date publishDate, byte[] image, double price, String description) throws Exception {
 
+
+        if (userValidationService.canCreateBook(title)) {
+
+            BookServiceModel bookServiceModel = new BookServiceModel();
+            bookServiceModel.setCategory(this.mapper.map(category, CategoryServiceModel.class));
+            bookServiceModel.setTitle(title);
+            bookServiceModel.setAuthor(author);
+            bookServiceModel.setIsbn(isbn);
+            bookServiceModel.setPublishDate(publishDate);
+            bookServiceModel.setImage(image);
+            bookServiceModel.setPrice(price);
+            bookServiceModel.setDescription(description);
+            this.bookRepository.create(mapper.map(bookServiceModel, Book.class));
+        } else {
+            throw new Exception("Book cannot be created");
+        }
     }
 
     @Override

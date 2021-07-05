@@ -1,6 +1,8 @@
 package bookstore.service.impl;
 
+import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
+import bookstore.repository.BookRepository;
 import bookstore.repository.CategoryRepository;
 import bookstore.repository.UserRepository;
 import bookstore.service.ValidationService;
@@ -21,12 +23,14 @@ public class ValidationServiceImpl implements ValidationService {
     private final EntityManager entityManager;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final BookRepository bookRepository;
 
     public ValidationServiceImpl() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
         this.entityManager = entityManagerFactory.createEntityManager();
         this.userRepository = new UserRepository(entityManager);
         this.categoryRepository = new CategoryRepository(entityManager);
+        this.bookRepository = new BookRepository(entityManager);
     }
 
 
@@ -36,8 +40,23 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
+    public boolean canCreateBook(String bookName) {
+        return isBookValid(bookName);
+    }
+
+    @Override
     public boolean canCreateCategory(String email) {
         return isCategoryNameExist(email);
+    }
+
+    private boolean isBookValid(String bookName) {
+        Book book = this.bookRepository.findByBookTitle(bookName);
+
+        if (book != null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private boolean isEmailValid(String email) {
@@ -51,7 +70,6 @@ public class ValidationServiceImpl implements ValidationService {
             return false;
         }
     }
-
 
 
     @Override
@@ -85,4 +103,6 @@ public class ValidationServiceImpl implements ValidationService {
             return false;
         }
     }
+
+
 }
