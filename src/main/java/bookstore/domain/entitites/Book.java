@@ -2,12 +2,8 @@ package bookstore.domain.entitites;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 import java.sql.Timestamp;
-
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Entity
@@ -30,6 +26,7 @@ public class Book implements Serializable {
     private Category category;
     private Set<OrdersDetail> ordersDetails;
     private Set<Review> reviews;
+    private String base64Image;
 
     @Id
     @Column(name = "book_id")
@@ -40,6 +37,17 @@ public class Book implements Serializable {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    @Transient
+    public String getBase64Image() {
+        this.base64Image = Base64.getEncoder().encodeToString(this.image);
+        return this.base64Image;
+    }
+
+    @Transient
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 
     @Basic
