@@ -71,7 +71,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findBookByTitle(String title) {
-        return null;
+        return this.bookRepository.findByBookTitle(title);
     }
 
     @Override
