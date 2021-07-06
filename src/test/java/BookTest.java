@@ -70,6 +70,14 @@ public class BookTest {
 
         assertTrue(books.size() > 0);
     }
+
+    @Test
+    public void testListByCategory() {
+        int categoryId = 7;
+        List<Book> books = bookRepository.findAllBooksByCategory(categoryId);
+
+        assertTrue(books.size() > 0);
+    }
     @AfterClass
     public static void tearDownClass() {
 

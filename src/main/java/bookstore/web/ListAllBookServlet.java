@@ -28,6 +28,7 @@ public class ListAllBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         BookServiceImpl bookService = new BookServiceImpl();
 
         List<BookServiceModel> aLlBooks = bookService.findALl();

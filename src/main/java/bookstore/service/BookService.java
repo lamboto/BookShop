@@ -20,6 +20,7 @@ public interface BookService {
 
     Book findBookByTitle(String title);
 
+    List<BookServiceModel> findByCategoryId(int categoryId);
 
     Book getById(int id);
 }

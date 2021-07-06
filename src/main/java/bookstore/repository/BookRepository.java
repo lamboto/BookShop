@@ -37,6 +37,10 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
         super.delete(Book.class, id);
     }
 
+    public List<Book> findAllBooksByCategory(int categoryId){
+       return super.findWithNamedQuery("Book.findByCategory", "categoryId", categoryId);
+    }
+
     public Book findByBookTitle(String title) {
         List<Book> listBooks = super.findWithNamedQuery("Book.findByTitle", "title", title);
         if (listBooks != null && listBooks.size() > 0) {

@@ -12,6 +12,7 @@ import java.sql.Timestamp;
         @NamedQuery(name = "Book.findByTitle", query = "select b from Book b where b.title = :title"),
         @NamedQuery(name = "Book.findAll", query = "select b from Book b order by b.title"),
         @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
+        @NamedQuery(name = "Book.findByCategory", query = "select b from Book b where b.category.categoryId = :categoryId"),
 })
 public class Book implements Serializable {
     private int bookId;
