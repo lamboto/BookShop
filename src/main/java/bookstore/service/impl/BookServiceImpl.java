@@ -2,12 +2,9 @@ package bookstore.service.impl;
 
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.User;
 import bookstore.domain.servicemodels.BookServiceModel;
 import bookstore.domain.servicemodels.CategoryServiceModel;
-import bookstore.domain.servicemodels.UserServiceModel;
 import bookstore.repository.BookRepository;
-import bookstore.repository.UserRepository;
 import bookstore.service.BookService;
 import config.Mapper;
 
@@ -60,7 +57,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(int id) throws Exception {
-
+        if (this.userValidationService.isBookValidToDelete(id)){
+            this.bookRepository.delete(id);
+        }else {
+            throw new Exception("Book cannot be deleted");
+        }
     }
 
     @Override

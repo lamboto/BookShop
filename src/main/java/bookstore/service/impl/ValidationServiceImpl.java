@@ -41,7 +41,7 @@ public class ValidationServiceImpl implements ValidationService {
 
     @Override
     public boolean canCreateBook(String bookName) {
-        return isBookValid(bookName);
+        return isBookNameExist(bookName);
     }
 
     @Override
@@ -49,7 +49,18 @@ public class ValidationServiceImpl implements ValidationService {
         return isCategoryNameExist(email);
     }
 
-    private boolean isBookValid(String bookName) {
+    public boolean isBookValidToDelete(int id) {
+        Book book = this.bookRepository.get(id);
+
+        if (book != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean isBookNameExist(String bookName) {
         Book book = this.bookRepository.findByBookTitle(bookName);
 
         if (book != null) {

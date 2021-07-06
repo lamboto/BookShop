@@ -64,9 +64,9 @@
 </footer>
 </body>
 <script>
-    function confirmDelete(userId) {
-        if (confirm("Are you sure you want to delete the user with ID "+userId+"?")){
-            window.location='delete_user?id='+userId;
+    function confirmDelete(bookId) {
+        if (confirm("Are you sure you want to delete the book with ID "+bookId+"?")){
+            window.location='delete_book?id='+bookId;
         }
     }
 </script>
