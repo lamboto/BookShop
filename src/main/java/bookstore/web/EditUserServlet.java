@@ -22,7 +22,7 @@ public class EditUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("bookId"));
+        int id = Integer.parseInt(req.getParameter("id"));
         User user = this.userService.getById(id);
 
         EditUserViewModel editViewModel = this.mapper.map(user, EditUserViewModel.class);
@@ -30,6 +30,8 @@ public class EditUserServlet extends HttpServlet {
 
         req.getRequestDispatcher("user_form.jsp")
                 .forward(req, resp);
+
+
     }
 
     @Override

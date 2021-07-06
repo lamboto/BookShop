@@ -28,11 +28,11 @@
 <br>
 <div align="center">
     <c:if test="${user != null}">
-            <form action="edit_user" method="post" onsubmit="return validateInputForm()">
-                <input type="hidden" name="userId" value="${user.userId}">
+    <form action="edit_user" method="post" onsubmit="return validateInputForm()">
+        <input type="hidden" name="userId" value="${user.userId}">
         </c:if>
         <c:if test="${user == null}">
-                <form action="create_user" method="post" onsubmit="return validateInputForm()">
+        <form action="create_user" method="post" onsubmit="return validateInputForm()">
             </c:if>
             <table>
                 <tr>
@@ -78,7 +78,7 @@
             fieldEmail.focus();
             return false;
         }
-        if (fieldFullname.value.length === 0) {
+            if (fieldFullname.value.length === 0) {
             alert("Fullname is required")
             fieldEmail.focus();
             return false;
