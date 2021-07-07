@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <header>
     <jsp:directive.include file="navbar.jsp"/>
 </header>

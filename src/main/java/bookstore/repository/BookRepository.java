@@ -49,6 +49,10 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
         return query.getResultList();
     }
 
+    public List<Book> findByKeyword(String keyword) {
+        return super.findWithNamedQuery("Book.findByKeyword", "keyword", "%"+keyword+"%");
+    }
+
     public Book findByBookTitle(String title) {
         List<Book> listBooks = super.findWithNamedQuery("Book.findByTitle", "title", title);
         if (listBooks != null && listBooks.size() > 0) {

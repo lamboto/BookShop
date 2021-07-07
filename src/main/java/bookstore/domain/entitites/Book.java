@@ -1,5 +1,4 @@
 package bookstore.domain.entitites;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -13,7 +12,10 @@ import java.sql.Timestamp;
         @NamedQuery(name = "Book.findAll", query = "select b from Book b order by b.title"),
         @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
         @NamedQuery(name = "Book.findByCategory", query = "select b from Book b where b.category.categoryId = :categoryId"),
-        @NamedQuery(name = "Book.findByPublishDate", query = "select b from Book b order by b.publishDate desc ")
+        @NamedQuery(name = "Book.findByPublishDate", query = "select b from Book b order by b.publishDate desc "),
+        @NamedQuery(name = "Book.findByKeyword",query = "select b from Book b where b.title like :keyword"+
+        " or b.author like :keyword"+
+        " or b.description like :keyword")
 })
 public class Book implements Serializable {
     private int bookId;

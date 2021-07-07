@@ -22,6 +22,8 @@ public interface BookService {
 
     List<BookServiceModel> findByLastUpdateTime();
 
+    List<BookServiceModel> findByKeyword(String keyword);
+
     List<BookServiceModel> findByCategoryId(int categoryId);
 
     Book getById(int id);

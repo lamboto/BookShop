@@ -79,6 +79,15 @@ public class BookTest {
     }
 
     @Test
+    public void testSearchBookKeyword() {
+
+        List<Book> books = bookRepository.findByKeyword("dem");
+
+
+        assertEquals(1,books.size());
+    }
+
+    @Test
     public void testListByCategory() {
         int categoryId = 7;
         List<Book> books = bookRepository.findAllBooksByCategory(categoryId);

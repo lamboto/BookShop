@@ -98,6 +98,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookServiceModel> findByKeyword(String keyword) {
+        return this.bookRepository.findByKeyword(keyword).stream()
+                .map(e -> this.mapper.map(e, BookServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BookServiceModel> findByCategoryId(int categoryId) {
         return this.bookRepository.findAllBooksByCategory(categoryId).stream()
                 .map(e -> this.mapper.map(e, BookServiceModel.class))
