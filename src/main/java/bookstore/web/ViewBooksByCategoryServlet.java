@@ -27,7 +27,7 @@ public class ViewBooksByCategoryServlet extends HttpServlet {
         int categoryId = Integer.parseInt(req.getParameter("id"));
         CategoryServiceImpl categoryService = new CategoryServiceImpl();
 
-        Category category = categoryService.getById(categoryId);
+
 
         List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
         List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
@@ -36,6 +36,8 @@ public class ViewBooksByCategoryServlet extends HttpServlet {
 
         BookServiceImpl bookService = new BookServiceImpl();
 
+
+        Category category = categoryService.getById(categoryId);
         List<BookServiceModel> aLlBooks = bookService.findByCategoryId(categoryId);
         List<ListAllBookViewModel> allBooksModel = aLlBooks.stream().map(e -> this.mapper.map(e, ListAllBookViewModel.class))
                 .collect(Collectors.toList());

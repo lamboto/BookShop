@@ -11,6 +11,9 @@ import config.Mapper;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,7 +84,6 @@ public class BookServiceImpl implements BookService {
 
         this.bookRepository.update(mapper.map(bookServiceModel, Book.class));
     }
-
     @Override
     public Book findBookByTitle(String title) {
         return this.bookRepository.findByBookTitle(title);
@@ -97,6 +99,19 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getById(int id) {
         return this.bookRepository.get(id);
+    }
+
+    public byte[] getBytes(Part part) throws IOException {
+        byte[] imageBytes = null;
+        if (part != null && part.getSize() > 0) {
+            long size = part.getSize();
+            imageBytes = new byte[(int) size];
+
+            InputStream inputStream = part.getInputStream();
+            inputStream.read(imageBytes);
+            inputStream.close();
+        }
+        return imageBytes;
     }
 }
 

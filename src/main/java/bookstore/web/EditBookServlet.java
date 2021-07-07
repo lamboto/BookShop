@@ -92,15 +92,7 @@ public class EditBookServlet extends HttpServlet {
 
         Part part = req.getPart("image");
 
-        byte[] imageBytes = null;
-        if (part != null && part.getSize() > 0) {
-            long size = part.getSize();
-            imageBytes = new byte[(int) size];
-
-            InputStream inputStream = part.getInputStream();
-            inputStream.read(imageBytes);
-            inputStream.close();
-        }
+        byte[] imageBytes = bookService.getBytes(part);
 
         double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
