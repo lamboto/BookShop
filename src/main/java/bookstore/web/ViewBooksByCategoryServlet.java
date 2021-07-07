@@ -28,7 +28,6 @@ public class ViewBooksByCategoryServlet extends HttpServlet {
         CategoryServiceImpl categoryService = new CategoryServiceImpl();
 
 
-
         List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
         List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
                 .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))

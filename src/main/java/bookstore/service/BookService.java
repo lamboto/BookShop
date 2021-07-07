@@ -20,6 +20,8 @@ public interface BookService {
 
     Book findBookByTitle(String title);
 
+    List<BookServiceModel> findByLastUpdateTime();
+
     List<BookServiceModel> findByCategoryId(int categoryId);
 
     Book getById(int id);

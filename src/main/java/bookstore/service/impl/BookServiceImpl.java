@@ -60,9 +60,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(int id) throws Exception {
-        if (this.userValidationService.isBookValidToDelete(id)){
+        if (this.userValidationService.isBookValidToDelete(id)) {
             this.bookRepository.delete(id);
-        }else {
+        } else {
             throw new Exception("Book cannot be deleted");
         }
     }
@@ -84,14 +84,22 @@ public class BookServiceImpl implements BookService {
 
         this.bookRepository.update(mapper.map(bookServiceModel, Book.class));
     }
+
     @Override
     public Book findBookByTitle(String title) {
         return this.bookRepository.findByBookTitle(title);
     }
 
     @Override
+    public List<BookServiceModel> findByLastUpdateTime() {
+        return this.bookRepository.listNewestBooks().stream()
+                .map(e -> this.mapper.map(e, BookServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BookServiceModel> findByCategoryId(int categoryId) {
-         return this.bookRepository.findAllBooksByCategory(categoryId).stream()
+        return this.bookRepository.findAllBooksByCategory(categoryId).stream()
                 .map(e -> this.mapper.map(e, BookServiceModel.class))
                 .collect(Collectors.toList());
     }

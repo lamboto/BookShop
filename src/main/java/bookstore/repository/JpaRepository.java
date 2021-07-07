@@ -66,7 +66,10 @@ public class JpaRepository<T> {
         query.setParameter(paramName, paramValue);
         return query.getResultList();
     }
-
+    public List<T> findWithNamedQuery(String queryName) {
+        Query query = entityManager.createNamedQuery(queryName);
+        return query.getResultList();
+    }
     public List<T> findWithNamedQuery(String queryName, Map<String, Object> parameters) {
         Query query = entityManager.createNamedQuery(queryName);
         Set<Map.Entry<String, Object>> setParameters = parameters.entrySet();

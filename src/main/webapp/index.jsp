@@ -5,9 +5,6 @@
   Time: 12:29 ч.
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
 <head>
     <title>Index</title>
@@ -19,10 +16,32 @@
 </header>
 
 <div align="center">
-    <h3>Main content:</h3>
-    <h2>New book:</h2>
-    <h2>Best selling book:</h2>
-    <h2>Most-favored book:</h2>
+    <div align="center" style="width: 80%;margin: 0 auto">
+        <h2>New books:</h2>
+        <c:forEach items="${newBooks}" var="book">
+            <div style="display: inline-block; margin: 20px">
+                <div>
+                    <a href="view_book?id=${book.bookId}">
+                        <img src="data:image/jpg;base64,${book.base64Image}" width="128" height="164"/>
+                    </a>
+                </div>
+                <div>
+                    <a href="view_book?id=${book.bookId}">
+                        <b>${book.title}</b>
+                    </a>
+                </div>
+                <div>Rating *****</div>
+                <div><i></i>by ${book.author}</div>
+                <div><b>$${book.price}</b></div>
+            </div>
+        </c:forEach>
+    </div>
+    <div align="center" style="clear: both">
+        <h2>Best-Selling Books:</h2>
+    </div>
+    <div align="center" style="clear: both">
+        <h2>Most-favored Books:</h2>
+    </div>
 </div>
 
 <footer>

@@ -4,6 +4,7 @@ import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -37,8 +38,15 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
         super.delete(Book.class, id);
     }
 
-    public List<Book> findAllBooksByCategory(int categoryId){
-       return super.findWithNamedQuery("Book.findByCategory", "categoryId", categoryId);
+    public List<Book> findAllBooksByCategory(int categoryId) {
+        return super.findWithNamedQuery("Book.findByCategory", "categoryId", categoryId);
+    }
+
+    public List<Book> listNewestBooks() {
+        Query query = this.entityManager.createNamedQuery("Book.findByPublishDate");
+        query.setFirstResult(0);
+        query.setMaxResults(4);
+        return query.getResultList();
     }
 
     public Book findByBookTitle(String title) {

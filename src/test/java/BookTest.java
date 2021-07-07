@@ -1,8 +1,6 @@
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.User;
 import bookstore.repository.BookRepository;
-import bookstore.repository.CategoryRepository;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.DateFormat;
@@ -69,6 +66,16 @@ public class BookTest {
         List<Book> books = bookRepository.listAll();
 
         assertTrue(books.size() > 0);
+    }
+
+    @Test
+    public void testListNewBooks() {
+        List<Book> books = bookRepository.listNewestBooks();
+        for (Book book : books) {
+            System.out.println(book.getTitle()+"-" + book.getPublishDate());
+        }
+
+        assertEquals(4,books.size());
     }
 
     @Test

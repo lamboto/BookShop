@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div align="center">
+<div align="center" style="clear: both">
     <h4>Footer: Copyright, About,Contact</h4>
 </div>
