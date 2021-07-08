@@ -50,7 +50,7 @@
                     <td>Category:</td>
                     <td>
                         <select name="category">
-                            <c:forEach items="${listCategories}" var="category">
+                            <c:forEach items="${allCategories}" var="category">
                                 <c:if test="${category.categoryId eq book.category.categoryId}">
                                     <option value="${category.categoryId}" selected>
                                 </c:if>

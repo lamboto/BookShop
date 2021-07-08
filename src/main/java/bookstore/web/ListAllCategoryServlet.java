@@ -22,16 +22,6 @@ public class ListAllCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
-
-        List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
-
-        List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
-                .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
-                .collect(Collectors.toList());
-
-        req.setAttribute("listCategories", categoryViewModels);
-
         req.getRequestDispatcher("category_list.jsp")
         .forward(req,resp);
     }

@@ -33,7 +33,7 @@
             <th>Category Name</th>
             <th>Actions</th>
         </tr>
-        <c:forEach var="category" items="${listCategories}" varStatus="status">
+        <c:forEach var="category" items="${allCategories}" varStatus="status">
             <tr>
                 <td>${status.index+1}</td>
                 <td>${category.categoryId}</td>

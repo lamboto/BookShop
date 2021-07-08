@@ -20,28 +20,31 @@ import java.util.stream.Collectors;
 
 @WebServlet("/view_category")
 public class ViewBooksByCategoryServlet extends HttpServlet {
-    private final Mapper mapper = new Mapper();
+    private final Mapper mapper;
+    private final CategoryServiceImpl categoryService;
+
+    public ViewBooksByCategoryServlet() {
+        this.mapper = new Mapper();
+        this.categoryService = new CategoryServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int categoryId = Integer.parseInt(req.getParameter("id"));
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
 
 
-        List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
-        List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
-                .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
-                .collect(Collectors.toList());
+
 
         BookServiceImpl bookService = new BookServiceImpl();
 
 
         Category category = categoryService.getById(categoryId);
+
         List<BookServiceModel> aLlBooks = bookService.findByCategoryId(categoryId);
         List<ListAllBookViewModel> allBooksModel = aLlBooks.stream().map(e -> this.mapper.map(e, ListAllBookViewModel.class))
                 .collect(Collectors.toList());
 
-        req.setAttribute("allCategories", categoryViewModels);
+
         req.setAttribute("category", category);
         req.setAttribute("listBooks", allBooksModel);
 

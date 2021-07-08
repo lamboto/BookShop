@@ -24,16 +24,8 @@ public class ViewBookServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
         BookServiceImpl bookService = new BookServiceImpl();
 
-        List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
-
-        List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
-                .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
-                .collect(Collectors.toList());
-
-        req.setAttribute("allCategories", categoryViewModels);
 
         int id = Integer.parseInt(req.getParameter("id"));
         Book book = bookService.getById(id);

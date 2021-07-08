@@ -58,7 +58,7 @@ public class Category {
         return Objects.hash(categoryId, name);
     }
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
     public Set<Book> getBooks() {
         return books;
     }

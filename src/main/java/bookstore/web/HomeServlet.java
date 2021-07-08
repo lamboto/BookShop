@@ -20,28 +20,24 @@ import java.util.stream.Collectors;
 @WebServlet("")
 public class HomeServlet extends HttpServlet {
 
-    private final Mapper mapper = new Mapper();
+    private final BookServiceImpl bookService;
+    private final Mapper mapper;
+
+    public HomeServlet() {
+        this.bookService = new BookServiceImpl();
+        this.mapper = new Mapper();
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
-        BookServiceImpl bookService = new BookServiceImpl();
-
-        List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
-
-        List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
-                .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
-                .collect(Collectors.toList());
-
-        req.setAttribute("allCategories", categoryViewModels);
-
 
         List<BookServiceModel> byLastUpdateTime = bookService.findByLastUpdateTime();
 
         List<ListAllBookViewModel> bookModel = byLastUpdateTime.stream()
                 .map(e -> this.mapper.map(e, ListAllBookViewModel.class))
                 .collect(Collectors.toList());
-        req.setAttribute("newBooks",bookModel);
+        req.setAttribute("newBooks", bookModel);
 
         req.getRequestDispatcher("index.jsp")
                 .forward(req, resp);
