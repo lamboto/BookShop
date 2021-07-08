@@ -31,7 +31,7 @@ public class BookTest {
         entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
         entityManager = entityManagerFactory.createEntityManager();
 
-        bookRepository = new BookRepository(entityManager);
+        bookRepository = new BookRepository();
     }
 
     @Test

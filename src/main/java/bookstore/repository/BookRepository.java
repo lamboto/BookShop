@@ -12,8 +12,7 @@ import java.util.List;
 
 public class BookRepository extends JpaRepository<Book> implements GenericRepository<Book> {
 
-    public BookRepository(EntityManager entityManager) {
-        super(entityManager);
+    public BookRepository() {
     }
 
     @Override
@@ -43,14 +42,11 @@ public class BookRepository extends JpaRepository<Book> implements GenericReposi
     }
 
     public List<Book> listNewestBooks() {
-        Query query = this.entityManager.createNamedQuery("Book.findByPublishDate");
-        query.setFirstResult(0);
-        query.setMaxResults(4);
-        return query.getResultList();
+        return super.findWithNamedQuery("Book.findByPublishDate", 0, 4);
     }
 
     public List<Book> findByKeyword(String keyword) {
-        return super.findWithNamedQuery("Book.findByKeyword", "keyword", "%"+keyword+"%");
+        return super.findWithNamedQuery("Book.findByKeyword", "keyword", "%" + keyword + "%");
     }
 
     public Book findByBookTitle(String title) {

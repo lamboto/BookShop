@@ -8,8 +8,9 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class CategoryRepository extends JpaRepository<Category> implements GenericRepository<Category> {
-    public CategoryRepository(EntityManager entityManager) {
-        super(entityManager);
+
+    public CategoryRepository() {
+
     }
 
     @Override

@@ -19,16 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
-    private final EntityManagerFactory entityManagerFactory;
-    private final EntityManager entityManager;
     private final BookRepository bookRepository;
     private final Mapper mapper = new Mapper();
     private final ValidationServiceImpl userValidationService = new ValidationServiceImpl();
 
     public BookServiceImpl() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.bookRepository = new BookRepository(entityManager);
+        this.bookRepository = new BookRepository();
     }
 
     @Override

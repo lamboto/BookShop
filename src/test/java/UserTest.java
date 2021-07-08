@@ -23,7 +23,7 @@ public class UserTest {
         entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
         entityManager = entityManagerFactory.createEntityManager();
 
-        userRepository = new UserRepository(entityManager);
+        userRepository = new UserRepository();
     }
 
     @Test

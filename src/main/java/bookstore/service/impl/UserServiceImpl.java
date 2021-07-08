@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
 import bookstore.domain.entitites.User;
 
 public class UserServiceImpl implements UserService {
-    private final EntityManagerFactory entityManagerFactory;
-    private final EntityManager entityManager;
+
     private final UserRepository userRepository;
     private final Mapper mapper = new Mapper();
     private final ValidationServiceImpl userValidationService = new ValidationServiceImpl();
 
+
+
+
     public UserServiceImpl() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.userRepository = new UserRepository(entityManager);
+        this.userRepository = new UserRepository();
     }
 
 

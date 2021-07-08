@@ -24,7 +24,7 @@ public class CategoryTest {
         entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
         entityManager = entityManagerFactory.createEntityManager();
 
-        categoryRepository = new CategoryRepository(entityManager);
+        categoryRepository = new CategoryRepository();
     }
 
     @Test

@@ -19,18 +19,15 @@ public class ValidationServiceImpl implements ValidationService {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private final EntityManagerFactory entityManagerFactory;
-    private final EntityManager entityManager;
+
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
 
     public ValidationServiceImpl() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.userRepository = new UserRepository(entityManager);
-        this.categoryRepository = new CategoryRepository(entityManager);
-        this.bookRepository = new BookRepository(entityManager);
+        this.userRepository = new UserRepository();
+        this.categoryRepository = new CategoryRepository();
+        this.bookRepository = new BookRepository();
     }
 
 

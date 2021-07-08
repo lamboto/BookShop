@@ -14,16 +14,12 @@ import java.util.stream.Collectors;
 
 public class CategoryServiceImpl implements CategoryService {
 
-    private final EntityManagerFactory entityManagerFactory;
-    private final EntityManager entityManager;
     private final CategoryRepository categoryRepository;
     private final Mapper mapper = new Mapper();
     private final ValidationServiceImpl validationService = new ValidationServiceImpl();
 
     public CategoryServiceImpl() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("book_shop");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.categoryRepository = new CategoryRepository(entityManager);
+        this.categoryRepository = new CategoryRepository();
     }
 
     @Override
