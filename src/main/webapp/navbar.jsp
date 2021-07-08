@@ -9,7 +9,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div align="center">
     <div>
-        <img src="/resources/images/BookstoreLogo%20(1).png" alt="Book store logo"/>
+        <a href="${pageContext.request.contextPath}/">
+            <img src="/resources/images/BookstoreLogo%20(1).png" alt="Book store logo"/>
+        </a>
     </div>
 
     <div>
