@@ -159,7 +159,7 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
     public Set<OrdersDetail> getOrdersDetails() {
         return ordersDetails;
     }
@@ -168,7 +168,7 @@ public class Book implements Serializable {
         this.ordersDetails = ordersDetails;
     }
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
     public Set<Review> getReviews() {
         return reviews;
     }

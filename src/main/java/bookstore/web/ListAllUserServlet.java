@@ -1,10 +1,7 @@
 package bookstore.web;
 
-import bookstore.domain.servicemodels.BookServiceModel;
 import bookstore.domain.servicemodels.UserServiceModel;
-import bookstore.domain.view.ListAllBookViewModel;
 import bookstore.domain.view.ListAllUserViewModel;
-import bookstore.service.impl.BookServiceImpl;
 import bookstore.service.impl.UserServiceImpl;
 import config.Mapper;
 
@@ -20,14 +17,18 @@ import java.util.stream.Collectors;
 @WebServlet("/admin/list_users")
 public class ListAllUserServlet extends HttpServlet {
 
-    private final Mapper mapper = new Mapper();
+    private final Mapper mapper;
+    private final UserServiceImpl userService;
+
+    public ListAllUserServlet() {
+        this.mapper = new Mapper();
+        this.userService = new UserServiceImpl();
+    }
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserServiceImpl userService = new UserServiceImpl();
-
-        List<UserServiceModel> aLlUsers = userService.findALl();
+        List<UserServiceModel> aLlUsers = this.userService.findALl();
 
 
         List<ListAllUserViewModel> allUsersModel = aLlUsers.stream().map(e -> this.mapper.map(e, ListAllUserViewModel.class))
