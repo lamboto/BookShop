@@ -8,9 +8,6 @@ import bookstore.repository.BookRepository;
 import bookstore.service.BookService;
 import config.Mapper;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +18,7 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final Mapper mapper = new Mapper();
-    private final ValidationServiceImpl userValidationService = new ValidationServiceImpl();
+    private final ValidationServiceImpl validationService = new ValidationServiceImpl();
 
     public BookServiceImpl() {
         this.bookRepository = new BookRepository();
@@ -38,7 +35,7 @@ public class BookServiceImpl implements BookService {
     public void createBook(Category category, String title, String author, String isbn, Date publishDate, byte[] image, double price, String description) throws Exception {
 
 
-        if (userValidationService.canCreateBook(title)) {
+        if (validationService.canCreateBook(title)) {
             BookServiceModel bookServiceModel = new BookServiceModel();
             bookServiceModel.setCategory(this.mapper.map(category, CategoryServiceModel.class));
             bookServiceModel.setTitle(title);
@@ -56,7 +53,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(int id) throws Exception {
-        if (this.userValidationService.isBookValidToDelete(id)) {
+        if (this.validationService.isBookValidToDelete(id)) {
             this.bookRepository.delete(id);
         } else {
             throw new Exception("Book cannot be deleted");

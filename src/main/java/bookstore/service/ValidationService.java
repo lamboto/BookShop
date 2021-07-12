@@ -7,5 +7,6 @@ public interface ValidationService {
     boolean isCategoryNameExist(String name);
     boolean isCategoryValid(int id);
     boolean canCreateBook(String book);
+    boolean canCreateCustomer(String email,String password,String confirmPassword);
 
 }

@@ -12,5 +12,12 @@ C:/Users/t_lamburov/Desktop/BookShop/src/main/resources/META-INF/persistence.xml
       <jdbc-url>jdbc:mysql://localhost:3306/book_shop?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=UTC</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="4ef91b97-06e1-482f-a8ad-6cbfc7c85b16">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

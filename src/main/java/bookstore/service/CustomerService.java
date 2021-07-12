@@ -10,14 +10,15 @@ import java.util.List;
 public interface CustomerService {
     List<CustomerServiceModel> findALl();
 
-    void createCustomer(String email,String fullName,String password,String confirmPassword,String phoneNumber,String address,String city,String zipCode,String country) throws Exception;
+    void registerCustomer(String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception;
 
     void delete(int id) throws Exception;
 
-    void updateCustomer(int id, String name) throws Exception;
+    void updateCustomer(int id, String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception;
 
     Customer findCustomerByName(String name);
 
+    Customer findByEmail(String email);
 
     Customer getById(int id);
 }

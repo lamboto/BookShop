@@ -3,13 +3,15 @@ package bookstore.domain.entitites;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customers", schema = "book_shop")
 @NamedQueries({
         @NamedQuery(name = "Customer.findAll", query = "select c from Customer c "),
-        @NamedQuery(name = "Customer.count", query = "select count(c.customerId) from Customer c")
+        @NamedQuery(name = "Customer.count", query = "select count(c.customerId) from Customer c"),
+        @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email")
 })
 public class Customer {
     private int customerId;
@@ -21,9 +23,12 @@ public class Customer {
     private String phone;
     private String zipcode;
     private String password;
-    private Timestamp registerDate;
+    private Date registerDate;
     private Collection<BookOrder> bookOrderByCustomerId;
     private Collection<Review> reviews;
+
+    public Customer() {
+    }
 
     @Id
     @Column(name = "customer_id")
@@ -118,11 +123,11 @@ public class Customer {
 
     @Basic
     @Column(name = "register_date")
-    public Timestamp getRegisterDate() {
+    public Date getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Timestamp registerDate) {
+    public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
     }
 
@@ -148,7 +153,7 @@ public class Customer {
         this.bookOrderByCustomerId = bookOrderByCustomerId;
     }
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
     public Collection<Review> getReviewsByCustomerId() {
         return reviews;
     }

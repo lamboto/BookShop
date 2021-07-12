@@ -12,26 +12,50 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapper mapper;
+    private final ValidationServiceImpl validationService;
 
     public CustomerServiceImpl() {
         this.mapper = new ModelMapper();
         this.customerRepository = new CustomerRepository();
+        this.validationService = new ValidationServiceImpl();
     }
 
 
     @Override
     public void delete(int id) throws Exception {
-
+        if (this.validationService.isCustomerValidToDelete(id)) {
+            this.customerRepository.delete(id);
+        } else {
+            throw new Exception("Customer cannot be deleted");
+        }
     }
 
     @Override
-    public void updateCustomer(int id, String name) throws Exception {
-
+    public void updateCustomer(int id, String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception {
+        if (validationService.canCreateCustomer(email, password, confirmPassword)) {
+            CustomerServiceModel customerServiceModel = new CustomerServiceModel();
+            customerServiceModel.setEmail(email);
+            customerServiceModel.setFullName(fullName);
+            customerServiceModel.setPassword(password);
+            customerServiceModel.setPhone(phoneNumber);
+            customerServiceModel.setAddress(address);
+            customerServiceModel.setCity(city);
+            customerServiceModel.setZipcode(zipCode);
+            customerServiceModel.setCountry(country);
+            this.customerRepository.update(this.mapper.map(customerServiceModel, Customer.class));
+        } else {
+            throw new Exception("Customer cannot be updated");
+        }
     }
 
     @Override
     public Customer findCustomerByName(String name) {
         return null;
+    }
+
+    @Override
+    public Customer findByEmail(String email) {
+        return this.customerRepository.findCustomerByEmail(email);
     }
 
     @Override
@@ -42,18 +66,23 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void createCustomer(String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception {
+    public void registerCustomer(String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception {
 
-        CustomerServiceModel customerServiceModel = new CustomerServiceModel();
-        customerServiceModel.setEmail(email);
-        customerServiceModel.setFullName(fullName);
-        customerServiceModel.setPassword(password);
-        customerServiceModel.setPhone(phoneNumber);
-        customerServiceModel.setAddress(address);
-        customerServiceModel.setCity(city);
-        customerServiceModel.setZipcode(zipCode);
-        customerServiceModel.setCountry(country);
-        this.customerRepository.create(this.mapper.map(customerServiceModel, Customer.class));
+        if (validationService.canCreateCustomer(email, password, confirmPassword)) {
+            CustomerServiceModel customerServiceModel = new CustomerServiceModel();
+            customerServiceModel.setEmail(email);
+            customerServiceModel.setFullName(fullName);
+            customerServiceModel.setPassword(password);
+            customerServiceModel.setPhone(phoneNumber);
+            customerServiceModel.setAddress(address);
+            customerServiceModel.setCity(city);
+            customerServiceModel.setZipcode(zipCode);
+            customerServiceModel.setCountry(country);
+            this.customerRepository.create(this.mapper.map(customerServiceModel, Customer.class));
+        } else {
+            throw new Exception("Customer cannot be created");
+        }
+
 
     }
 

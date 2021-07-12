@@ -2,8 +2,10 @@ package bookstore.service.impl;
 
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
+import bookstore.domain.entitites.Customer;
 import bookstore.repository.BookRepository;
 import bookstore.repository.CategoryRepository;
+import bookstore.repository.CustomerRepository;
 import bookstore.repository.UserRepository;
 import bookstore.service.ValidationService;
 
@@ -23,12 +25,38 @@ public class ValidationServiceImpl implements ValidationService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
+    private final CustomerRepository customerRepository;
 
     public ValidationServiceImpl() {
         this.userRepository = new UserRepository();
         this.categoryRepository = new CategoryRepository();
         this.bookRepository = new BookRepository();
+        this.customerRepository = new CustomerRepository();
     }
+
+
+    @Override
+    public boolean canCreateCustomer(String email, String password, String confirmPassword) {
+        return isCustomerEmailValid(email)
+                && arePasswordMatching(password, confirmPassword);
+    }
+
+    private boolean isCustomerEmailValid(String email) {
+        Customer customer = this.customerRepository.findCustomerByEmail(email);
+        if (customer == null) {
+            Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+
+            return matcher.find();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean arePasswordMatching(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
+    }
+
+
 
 
     @Override
@@ -50,6 +78,17 @@ public class ValidationServiceImpl implements ValidationService {
         Book book = this.bookRepository.get(id);
 
         if (book != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public boolean isCustomerValidToDelete(int id) {
+        Customer customer = this.customerRepository.get(id);
+
+        if (customer != null) {
             return true;
         } else {
             return false;
