@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="../resources/css/jquery-ui.min.css">
 
     <script type="text/javascript" src="../resources/css/jquery-ui.min.css"></script>
+    <script type="text/javascript" src="../resources/css/richtext.min.css"></script>
+    <script type="text/javascript" src="../resources/js/jquery.richtext.min.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
@@ -39,10 +42,10 @@
 <div align="center">
     <c:if test="${book != null}">
     <form action="edit_book" enctype="multipart/form-data" method="post" id="bookForm" onsubmit="">
-        <input type="hidden" name="bookId"  value="${book.bookId}">
+        <input type="hidden" name="bookId" value="${book.bookId}">
         </c:if>
         <c:if test="${book == null}">
-        <form action="create_book" enctype="multipart/form-data" method="post" id="bookForm" >
+        <form action="create_book" enctype="multipart/form-data" method="post" id="bookForm">
             </c:if>
             <table>
                 <tr>
@@ -57,7 +60,7 @@
                                 <c:if test="${category.categoryId ne book.category.categoryId}">
                                     <option value="${category.categoryId}">
                                 </c:if>
-                                        ${category.name}
+                                ${category.name}
                                 </option>
                             </c:forEach>
                         </select>
@@ -128,7 +131,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#publishDate').datepicker();
-        $('#book').change(function (){
+        $('#description').richText();
+        $('#book').change(function () {
             showImageThumbnail(this);
         })
     });

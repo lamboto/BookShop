@@ -16,14 +16,14 @@ import bookstore.domain.entitites.User;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final Mapper mapper = new Mapper();
-    private final ValidationServiceImpl userValidationService = new ValidationServiceImpl();
-
-
+    private final Mapper mapper;
+    private final ValidationServiceImpl userValidationService;
 
 
     public UserServiceImpl() {
         this.userRepository = new UserRepository();
+        this.mapper = new Mapper();
+        this.userValidationService = new ValidationServiceImpl();
     }
 
 
