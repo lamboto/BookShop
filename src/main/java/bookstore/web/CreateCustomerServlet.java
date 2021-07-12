@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet("/register")
+@WebServlet("/admin/create_customer")
 public class CreateCustomerServlet extends HttpServlet {
 
     private final Mapper mapper;
@@ -46,18 +46,18 @@ public class CreateCustomerServlet extends HttpServlet {
 
         Customer customerExist = this.customerService.findByEmail(email);
 
-       if (customerExist != null) {
-           String message = "Could not register customer with this email.A customer with email" + email + " already exists.";
-           req.setAttribute("message", message);
-           req.getRequestDispatcher("message.jsp")
-                   .forward(req, resp);
-       }
+        if (customerExist != null) {
+            String message = "Could not register customer with this email.A customer with email" + email + " already exists.";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("message.jsp")
+                    .forward(req, resp);
+        }
 
         try {
             this.customerService.registerCustomer(email, fullName, password, confirmPassword, phone, address, city, country, zipCode);
-            resp.sendRedirect("/index");
+            resp.sendRedirect("/admin/list_customers");
         } catch (Exception e) {
-            resp.sendRedirect("/register");
+            resp.sendRedirect("/admin/create_customer");
         }
 
     }

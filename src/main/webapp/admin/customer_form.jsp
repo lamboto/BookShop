@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-    <jsp:directive.include file="navbar.jsp"/>
+    <jsp:directive.include file="../navbar.jsp"/>
 </header>
 <div align="center">
     <h2>
@@ -32,7 +32,7 @@
         <input type="hidden" name="customerId" value="${customer.customerId}">
         </c:if>
         <c:if test="${customer == null}">
-        <form action="register" method="post" onsubmit="return validateInputForm()">
+        <form action="create_customer" method="post" onsubmit="return validateInputForm()">
             </c:if>
             <table>
                 <tr>
@@ -93,7 +93,7 @@
 </div>
 
 <footer>
-    <jsp:directive.include file="footer.jsp"/>
+    <jsp:directive.include file="../footer.jsp"/>
 </footer>
 </body>
 

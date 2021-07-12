@@ -20,7 +20,7 @@
 
 <div align="center">
     <h2>Customer Management</h2>
-    <h3><a href="/register">Create new Customer</a></h3>
+    <h3><a href="create_customer">Create new Customer</a></h3>
 </div>
 <div align="center">
 

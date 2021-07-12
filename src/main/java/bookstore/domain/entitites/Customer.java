@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "customers", schema = "book_shop")
 @NamedQueries({
-        @NamedQuery(name = "Customer.findAll", query = "select c from Customer c "),
+        @NamedQuery(name = "Customer.findAll", query = "select c from Customer c order by c.registerDate desc"),
         @NamedQuery(name = "Customer.count", query = "select count(c.customerId) from Customer c"),
         @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email")
 })
@@ -153,7 +153,7 @@ public class Customer {
         this.bookOrderByCustomerId = bookOrderByCustomerId;
     }
 
-    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     public Collection<Review> getReviewsByCustomerId() {
         return reviews;
     }
