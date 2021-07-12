@@ -32,20 +32,19 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(int id, String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception {
-        if (validationService.canCreateCustomer(email, password, confirmPassword)) {
-            CustomerServiceModel customerServiceModel = new CustomerServiceModel();
-            customerServiceModel.setEmail(email);
-            customerServiceModel.setFullName(fullName);
-            customerServiceModel.setPassword(password);
-            customerServiceModel.setPhone(phoneNumber);
-            customerServiceModel.setAddress(address);
-            customerServiceModel.setCity(city);
-            customerServiceModel.setZipcode(zipCode);
-            customerServiceModel.setCountry(country);
-            this.customerRepository.update(this.mapper.map(customerServiceModel, Customer.class));
-        } else {
-            throw new Exception("Customer cannot be updated");
-        }
+
+        CustomerServiceModel customerServiceModel = new CustomerServiceModel();
+        customerServiceModel.setCustomerId(id);
+        customerServiceModel.setEmail(email);
+        customerServiceModel.setFullName(fullName);
+        customerServiceModel.setPassword(password);
+        customerServiceModel.setPhone(phoneNumber);
+        customerServiceModel.setAddress(address);
+        customerServiceModel.setCity(city);
+        customerServiceModel.setZipcode(zipCode);
+        customerServiceModel.setCountry(country);
+
+        this.customerRepository.update(this.mapper.map(customerServiceModel, Customer.class));
     }
 
     @Override
@@ -88,6 +87,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getById(int id) {
-        return null;
+        return this.customerRepository.get(id);
     }
 }

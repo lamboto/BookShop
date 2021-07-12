@@ -12,10 +12,19 @@ public class EditCustomerViewModel {
     private String country;
     private String phone;
     private String zipcode;
+    private String confirmPassword;
     private String password;
     private Date registerDate;
 
     public EditCustomerViewModel() {
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public int getCustomerId() {
