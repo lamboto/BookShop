@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public void createUser(String email, String password, String fullName) throws Exception {
 
@@ -70,6 +71,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
 
     @Override
     public void updateUser(int id, String email, String password, String fullName) throws Exception {

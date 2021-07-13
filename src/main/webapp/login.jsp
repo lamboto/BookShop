@@ -18,10 +18,10 @@
 </header>
 
 <div align="center">
-    <h2>Login :</h2>
-    <form>
-        Email: <input type="text" size="10"></br>
-        Password: <input type="password" size="10"/>
+    <h2>Customer Login</h2>
+    <form action="login" method="post">
+        Email: <input type="text" id="email" name="email" size="10"></br>
+        Password: <input type="password" id="password" name="password" size="10"/>
         <input type="submit" value="Login"/>
     </form>
 </div>

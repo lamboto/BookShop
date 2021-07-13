@@ -7,6 +7,7 @@ import config.Mapper;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,15 +25,18 @@ public class CommonFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-        List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
+        if (!path.startsWith("/admin/")) {
+            List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
 
-        List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
-                .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
-                .collect(Collectors.toList());
+            List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
+                    .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
+                    .collect(Collectors.toList());
 
-        request.setAttribute("allCategories", categoryViewModels);
-
+            request.setAttribute("allCategories", categoryViewModels);
+        }
         System.out.println("Common filter->doFilter");
 
         chain.doFilter(request, response);

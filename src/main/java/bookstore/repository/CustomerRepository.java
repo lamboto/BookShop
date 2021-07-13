@@ -52,7 +52,7 @@ public class CustomerRepository extends JpaRepository<Customer> implements Gener
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("email", email);
         parameters.put("password", password);
-        List<Customer> listCustomers = super.findWithNamedQuery("User.checkLogin", parameters);
+        List<Customer> listCustomers = super.findWithNamedQuery("Customer.checkLogin", parameters);
         if (listCustomers.size() == 1) {
             return true;
         }

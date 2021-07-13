@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class CustomerTest {
 
@@ -29,14 +29,6 @@ public class CustomerTest {
         customerRepository = new CustomerRepository();
     }
 
-    private String email;
-    private String fullName;
-    private String address;
-    private String city;
-    private String country;
-    private String phone;
-    private String zipcode;
-    private String password;
 
 
     @Test
@@ -56,6 +48,15 @@ public class CustomerTest {
 
         assertTrue(customer.getCustomerId() > 0);
     }
+
+    @Test
+    public void testCheckLogin() {
+        String email = "toshkoaa@abv.bg";
+        String password = "asdasd";
+        boolean isTrue = customerRepository.checkLogin(email, password);
+        assertFalse(isTrue);
+    }
+
 
     @AfterClass
     public static void tearDownClass() {

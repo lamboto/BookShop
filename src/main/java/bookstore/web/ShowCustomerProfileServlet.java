@@ -1,8 +1,7 @@
 package bookstore.web;
 
-import bookstore.domain.entitites.Customer;
-import bookstore.domain.entitites.User;
 import bookstore.service.impl.CustomerServiceImpl;
+import config.Mapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,37 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/login")
-public class CustomerLoginServlet extends HttpServlet {
+@WebServlet("/view_profile")
+public class ShowCustomerProfileServlet extends HttpServlet {
 
     private final CustomerServiceImpl customerService;
+    private final Mapper mapper;
 
-    public CustomerLoginServlet() {
+    public ShowCustomerProfileServlet() {
         this.customerService = new CustomerServiceImpl();
+        this.mapper = new Mapper();
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp")
+        req.getRequestDispatcher("customer_profile.jsp")
                 .forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-
-        Customer customer = this.customerService.login(email, password);
-
-        if (customer == null) {
-            resp.sendRedirect("/login");
-        } else {
-            req.getSession()
-                    .setAttribute("loggedCustomer", customer);
-            req.getRequestDispatcher("customer_profile.jsp")
-                    .forward(req, resp);
-        }
-
+        super.doPost(req, resp);
     }
 }

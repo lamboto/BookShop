@@ -13,7 +13,11 @@ import java.io.IOException;
 @WebServlet("/admin/login")
 public class AdminLoginServlet extends HttpServlet {
 
-    private final UserServiceImpl userService = new UserServiceImpl();
+    private final UserServiceImpl userService;
+
+    public AdminLoginServlet() {
+        this.userService = new UserServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/admin/*")
+//@WebFilter("/admin/*")
 public class AdminAuthenticationFilter implements Filter {
 
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+      /* HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Object adminUser = request.getSession()
                 .getAttribute("userEmail");
@@ -42,7 +42,7 @@ public class AdminAuthenticationFilter implements Filter {
             request.getRequestDispatcher("admin_login.jsp").
                     forward(request, response);
 
-        }
+        }*/
     }
 
     public AdminAuthenticationFilter() {
