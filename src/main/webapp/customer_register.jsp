@@ -1,19 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: t_lamburov
-  Date: 12.7.2021 г.
-  Time: 11:22 ч.
+  Date: 13.7.2021 г.
+  Time: 09:49 ч.
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title> Bookstore Administration</title>
+    <title>Register Customer</title>
 </head>
 <body>
 <header>
-    <jsp:directive.include file="header.jsp"/>
+    <jsp:directive.include file="navbar.jsp"/>
 </header>
 <div align="center">
     <h2>
@@ -21,7 +19,7 @@
             <h2>Edit Customer</h2>
         </c:if>
         <c:if test="${customer == null}">
-            <h2>Create Customer</h2>
+            <h2>Register as a Customer</h2>
         </c:if>
     </h2>
 </div>
@@ -32,7 +30,7 @@
         <input type="hidden" name="customerId" value="${customer.customerId}">
         </c:if>
         <c:if test="${customer == null}">
-        <form action="create_customer" method="post" onsubmit="return validateInputForm()">
+        <form action="register" method="post" onsubmit="return validateInputForm()">
             </c:if>
             <table>
                 <tr>
@@ -84,7 +82,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="Save">
+                        <input type="submit" value="Submit">
                         <input type="submit" value="Cancel">
                     </td>
                 </tr>
@@ -93,7 +91,7 @@
 </div>
 
 <footer>
-    <jsp:directive.include file="../footer.jsp"/>
+    <jsp:directive.include file="footer.jsp"/>
 </footer>
 </body>
 
