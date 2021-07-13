@@ -9,12 +9,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Admin Login</title>
 </head>
 <body>
 
 <header>
-    <jsp:directive.include file="navbar.jsp"/>
+    <jsp:directive.include file="header.jsp"/>
 </header>
 
 <div align="center">
@@ -27,7 +27,7 @@
 </div>
 
 <footer>
-    <jsp:directive.include file="footer.jsp"/>
+    <jsp:directive.include file="../footer.jsp"/>
 </footer>
 
 </body>

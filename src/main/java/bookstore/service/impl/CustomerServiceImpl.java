@@ -89,4 +89,14 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getById(int id) {
         return this.customerRepository.get(id);
     }
+
+    @Override
+    public Customer login(String email, String password) {
+        boolean loginResult = this.customerRepository.checkLogin(email, password);
+        if (loginResult) {
+            return this.customerRepository.findCustomerByEmail(email);
+        } else {
+            return null;
+        }
+    }
 }

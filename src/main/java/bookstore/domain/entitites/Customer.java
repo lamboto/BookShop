@@ -11,7 +11,8 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Customer.findAll", query = "select c from Customer c order by c.registerDate desc"),
         @NamedQuery(name = "Customer.count", query = "select count(c.customerId) from Customer c"),
-        @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email")
+        @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email"),
+        @NamedQuery(name = "Customer.checkLogin", query = "select c from Customer c where c.email = :email and c.password = :password")
 })
 public class Customer {
     private int customerId;

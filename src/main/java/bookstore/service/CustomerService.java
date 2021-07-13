@@ -21,4 +21,6 @@ public interface CustomerService {
     Customer findByEmail(String email);
 
     Customer getById(int id);
+
+    Customer login(String email, String password);
 }

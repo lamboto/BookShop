@@ -47,7 +47,7 @@ public class CreateCustomerServlet extends HttpServlet {
         Customer customerExist = this.customerService.findByEmail(email);
 
         if (customerExist != null) {
-            String message = "Could not register customer with this email.A customer with email" + email + " already exists.";
+            String message = "Could not create customer with this email.A customer with email" + email + " already exists.";
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
                     .forward(req, resp);

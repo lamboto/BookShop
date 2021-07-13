@@ -3,9 +3,12 @@ package bookstore.repository;
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
 import bookstore.domain.entitites.Customer;
+import bookstore.domain.entitites.User;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerRepository extends JpaRepository<Customer> implements GenericRepository<Customer> {
 
@@ -43,6 +46,17 @@ public class CustomerRepository extends JpaRepository<Customer> implements Gener
     @Override
     public long count() {
         return super.count("Customer.count");
+    }
+
+    public boolean checkLogin(String email, String password) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("email", email);
+        parameters.put("password", password);
+        List<Customer> listCustomers = super.findWithNamedQuery("User.checkLogin", parameters);
+        if (listCustomers.size() == 1) {
+            return true;
+        }
+        return false;
     }
 
     public Customer findCustomerByEmail(String email) {
