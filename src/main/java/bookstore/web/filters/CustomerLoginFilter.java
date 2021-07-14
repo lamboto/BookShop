@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class CustomerLoginFilter implements Filter {
 
+    private static final String[] LOGIN_REQUIRED_URLS = {
+            "/view_profile", "/edit_profile"
+    };
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -19,21 +22,31 @@ public class CustomerLoginFilter implements Filter {
 
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-        if (path.startsWith("/admin/")){
-            chain.doFilter(request,response);
+        if (path.startsWith("/admin/")) {
+            chain.doFilter(request, response);
             return;
         }
         boolean loggedIn = session != null && session.getAttribute("loggedCustomer") != null;
 
+        String requestURL = httpRequest.getRequestURL().toString();
         System.out.println("Path" + path);
-        System.out.println("loggedin"+loggedIn);
+        System.out.println("loggedin" + loggedIn);
 
-        if (!loggedIn && path.startsWith("/view_profile")) {
+        if (!loggedIn &&  path.startsWith("/view_profile")) {
             httpRequest.getRequestDispatcher("login.jsp")
                     .forward(request, response);
 
         } else {
             chain.doFilter(request, response);
         }
+    }
+
+    private boolean isLoginRequired(String requestURL) {
+        for (String loginRequiredUrl : LOGIN_REQUIRED_URLS) {
+            if (requestURL.contains(loginRequiredUrl)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

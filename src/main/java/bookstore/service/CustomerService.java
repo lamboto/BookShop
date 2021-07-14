@@ -14,7 +14,7 @@ public interface CustomerService {
 
     void delete(int id) throws Exception;
 
-    void updateCustomer(int id, String email, String fullName, String password, String confirmPassword, String phoneNumber, String address, String city, String zipCode, String country) throws Exception;
+    void updateCustomer(CustomerServiceModel customerServiceModel) throws Exception;
 
     Customer findCustomerByName(String name);
 

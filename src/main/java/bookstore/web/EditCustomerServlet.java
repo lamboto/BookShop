@@ -2,6 +2,7 @@ package bookstore.web;
 
 import bookstore.domain.entitites.Customer;
 import bookstore.domain.entitites.User;
+import bookstore.domain.servicemodels.CustomerServiceModel;
 import bookstore.domain.view.EditCustomerViewModel;
 import bookstore.domain.view.EditUserViewModel;
 import bookstore.repository.CustomerRepository;
@@ -52,6 +53,17 @@ public class EditCustomerServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String zipCode = req.getParameter("zipcode");
 
+        CustomerServiceModel customer = new CustomerServiceModel();
+
+        customer.setCustomerId(customerId);
+        customer.setEmail(email);
+        customer.setFullName(fullName);
+        customer.setAddress(address);
+        customer.setCity(city);
+        customer.setCountry(country);
+        customer.setPhone(phone);
+        customer.setZipcode(zipCode);
+        customer.setPassword(password);
 
         Customer customerById = this.customerService.getById(customerId);
         Customer customerByEmail = this.customerService.findByEmail(email);
@@ -67,7 +79,7 @@ public class EditCustomerServlet extends HttpServlet {
 
         } else {
             try {
-                this.customerService.updateCustomer(customerId, email, fullName, password, confirmPassword, phone, address, city, zipCode, country);
+                this.customerService.updateCustomer(customer);
                 resp.sendRedirect("/admin/list_customers");
             } catch (Exception e) {
                 message = "Could not find customer with ID: " + customerId;
