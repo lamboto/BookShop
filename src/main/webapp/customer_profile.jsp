@@ -25,7 +25,7 @@
             <table>
                 <tr>
                     <td>Email Address:</td>
-                    <td><input type="text" name="email" id="email" size="20"
+                    <td><input type="text" class="normal" name="email" id="email" size="20"
                                value="<c:out value='${loggedCustomer.email}' />"></td>
                 </tr>
                 <tr>
