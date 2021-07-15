@@ -25,12 +25,12 @@ public class EditCustomerProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Customer customer = (Customer) req.getSession()
-                .getAttribute("loggedCustomer");
+        // Customer customer = (Customer) req.getSession()
+        //         .getAttribute("loggedCustomer");
 
 
-        EditCustomerViewModel customerViewModel = this.mapper.map(customer, EditCustomerViewModel.class);
-        req.setAttribute("customer", customerViewModel);
+        // EditCustomerViewModel customerViewModel = this.mapper.map(customer, EditCustomerViewModel.class);
+        // req.setAttribute("customer", customerViewModel);
 
         req.getRequestDispatcher("edit_profile.jsp")
                 .forward(req, resp);
@@ -38,9 +38,8 @@ public class EditCustomerProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CustomerServiceModel customer = new CustomerServiceModel();
 
-        int customerId = Integer.parseInt(req.getParameter("customerId"));
+        Customer customer = (Customer) req.getSession().getAttribute("loggedCustomer");
         String email = req.getParameter("email");
         if (email != null && !email.equals("")) {
             customer.setEmail(email);

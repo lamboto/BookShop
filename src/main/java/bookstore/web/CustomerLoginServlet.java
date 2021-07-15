@@ -39,8 +39,7 @@ public class CustomerLoginServlet extends HttpServlet {
         } else {
             req.getSession()
                     .setAttribute("loggedCustomer", customer);
-            req.getRequestDispatcher("customer_profile.jsp")
-                    .forward(req, resp);
+            resp.sendRedirect("/view_profile");
         }
 
     }

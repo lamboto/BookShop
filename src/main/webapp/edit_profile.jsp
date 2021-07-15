@@ -21,41 +21,41 @@
 <br>
 <div align="center">
     <form action="edit_profile" method="post" onsubmit="return validateInputForm()">
-        <input type="hidden" name="customerId" value="${customer.customerId}">
+        <input type="hidden" name="customerId" value="${loggedCustomer.customerId}">
         <table>
             <tr>
                 <td>Email Address:</td>
-                <td><b>${customer.email}</b> (Cannot be changed)</td>
+                <td><b>${loggedCustomer.email}</b> (Cannot be changed)</td>
             </tr>
             <tr>
                 <td>Full Name:</td>
                 <td><input type="text" name="fullname" id="fullname" size="20"
-                           value="<c:out value='${customer.fullName}' />"></td>
+                           value="<c:out value='${loggedCustomer.fullName}' />"></td>
             </tr>
             <tr>
                 <td>Phone Number:</td>
                 <td><input type="text" name="phone" id="phone" size="20"
-                           value="<c:out value='${customer.phone}' />"></td>
+                           value="<c:out value='${loggedCustomer.phone}' />"></td>
             </tr>
             <tr>
                 <td>Address:</td>
                 <td><input type="text" name="address" id="address" size="20"
-                           value="<c:out value='${customer.address}' />"></td>
+                           value="<c:out value='${loggedCustomer.address}' />"></td>
             </tr>
             <tr>
                 <td>City:</td>
                 <td><input type="text" name="city" id="city" size="20"
-                           value="<c:out value='${customer.city}' />"></td>
+                           value="<c:out value='${loggedCustomer.city}' />"></td>
             </tr>
             <tr>
                 <td>Zip code:</td>
                 <td><input type="text" name="zipcode" id="zipcode" size="20"
-                           value="<c:out value='${customer.zipcode}' />"></td>
+                           value="<c:out value='${loggedCustomer.zipcode}' />"></td>
             </tr>
             <tr>
                 <td>Country:</td>
                 <td><input type="text" name="country" id="country" size="20"
-                           value="<c:out value='${customer.country}' />"></td>
+                           value="<c:out value='${loggedCustomer.country}' />"></td>
             </tr>
 
             <tr>

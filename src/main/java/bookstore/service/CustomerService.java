@@ -16,6 +16,8 @@ public interface CustomerService {
 
     void updateCustomer(CustomerServiceModel customerServiceModel) throws Exception;
 
+    void updateCustomer(Customer customer) throws Exception;
+
     Customer findCustomerByName(String name);
 
     Customer findByEmail(String email);

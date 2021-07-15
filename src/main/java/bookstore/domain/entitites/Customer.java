@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "customers", schema = "book_shop")
@@ -25,8 +26,8 @@ public class Customer {
     private String zipcode;
     private String password;
     private Date registerDate;
-    private Collection<BookOrder> bookOrderByCustomerId;
-    private Collection<Review> reviews;
+    private Set<BookOrder> bookOrderByCustomerId;
+    private Set<Review> reviews;
 
     public Customer() {
     }
@@ -145,21 +146,21 @@ public class Customer {
         return Objects.hash(customerId, email, fullName, address, city, country, phone, zipcode, password, registerDate);
     }
 
-    @OneToMany(mappedBy = "customersByCustomerId")
-    public Collection<BookOrder> getBookOrdersByCustomerId() {
+    @OneToMany(mappedBy = "customersByCustomerId",fetch = FetchType.EAGER)
+    public Set<BookOrder> getBookOrdersByCustomerId() {
         return bookOrderByCustomerId;
     }
 
-    public void setBookOrdersByCustomerId(Collection<BookOrder> bookOrderByCustomerId) {
+    public void setBookOrdersByCustomerId(Set<BookOrder> bookOrderByCustomerId) {
         this.bookOrderByCustomerId = bookOrderByCustomerId;
     }
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
-    public Collection<Review> getReviewsByCustomerId() {
+    @OneToMany
+    public Set<Review> getReviewsByCustomerId() {
         return reviews;
     }
 
-    public void setReviewsByCustomerId(Collection<Review> reviewByCustomerId) {
+    public void setReviewsByCustomerId(Set<Review> reviewByCustomerId) {
         this.reviews = reviewByCustomerId;
     }
 }

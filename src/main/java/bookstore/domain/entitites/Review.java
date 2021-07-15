@@ -89,7 +89,7 @@ public class Review {
     }
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    @JoinColumn(nullable = false)
     public Customer getCustomer() {
         return customer;
     }

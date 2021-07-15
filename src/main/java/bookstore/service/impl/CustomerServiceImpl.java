@@ -32,8 +32,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(CustomerServiceModel customerServiceModel) throws Exception {
-
         this.customerRepository.update(this.mapper.map(customerServiceModel, Customer.class));
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) throws Exception {
+
+        this.customerRepository.update(customer);
     }
 
     @Override
