@@ -25,12 +25,6 @@ public class ShowCustomerProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Customer customer = (Customer) req.getSession()
-                .getAttribute("loggedCustomer");
-
-
-        EditCustomerViewModel customerViewModel = this.mapper.map(customer, EditCustomerViewModel.class);
-        req.setAttribute("customer", customerViewModel);
 
         req.getRequestDispatcher("customer_profile.jsp")
                 .forward(req, resp);
