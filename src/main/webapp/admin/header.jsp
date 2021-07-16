@@ -33,7 +33,7 @@
             <a href="list_categories">Categories</a> &nbsp;
             <a href="list_books">Books</a> &nbsp;
             <a href="list_customers">Customers</a> &nbsp;
-            <a href="reviews">Reviews</a> &nbsp;
+            <a href="review">Reviews</a> &nbsp;
             <a href="orders">Orders</a> &nbsp;
         </b>
     </div>

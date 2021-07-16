@@ -1,10 +1,6 @@
 package bookstore.domain.view;
 
-import bookstore.domain.entitites.BookOrder;
-import bookstore.domain.entitites.Review;
-
 import java.sql.Timestamp;
-import java.util.Collection;
 
 public class ListAllCustomerViewModel {
 

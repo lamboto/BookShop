@@ -1,4 +1,5 @@
 package bookstore.domain.entitites;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -13,9 +14,9 @@ import java.sql.Timestamp;
         @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
         @NamedQuery(name = "Book.findByCategory", query = "select b from Book b where b.category.categoryId = :categoryId"),
         @NamedQuery(name = "Book.findByPublishDate", query = "select b from Book b order by b.publishDate desc "),
-        @NamedQuery(name = "Book.findByKeyword",query = "select b from Book b where b.title like :keyword"+
-        " or b.author like :keyword"+
-        " or b.description like :keyword")
+        @NamedQuery(name = "Book.findByKeyword", query = "select b from Book b where b.title like :keyword" +
+                " or b.author like :keyword" +
+                " or b.description like :keyword")
 })
 public class Book implements Serializable {
     private int bookId;
@@ -28,9 +29,12 @@ public class Book implements Serializable {
     private Date publishDate;
     private Date lastUpdateTime;
     private Category category;
-    private Set<OrdersDetail> ordersDetails;
+    private Set<BookOrder> bookOrders;
     private Set<Review> reviews;
     private String base64Image;
+
+    public Book() {
+    }
 
     @Id
     @Column(name = "book_id")
@@ -134,21 +138,6 @@ public class Book implements Serializable {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return bookId == book.bookId && Double.compare(book.price, price) == 0 && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(description, book.description) && Objects.equals(isbn, book.isbn) && Arrays.equals(image, book.image) && Objects.equals(publishDate, book.publishDate) && Objects.equals(lastUpdateTime, book.lastUpdateTime);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(bookId, title, author, description, isbn, price, publishDate, lastUpdateTime);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
-    }
-
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     public Category getCategory() {
@@ -159,16 +148,16 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
-    public Set<OrdersDetail> getOrdersDetails() {
-        return ordersDetails;
+    @ManyToMany(mappedBy = "books")
+    public Set<BookOrder> getBookOrders() {
+        return bookOrders;
     }
 
-    public void setOrdersDetails(Set<OrdersDetail> ordersDetails) {
-        this.ordersDetails = ordersDetails;
+    public void setBookOrders(Set<BookOrder> bookOrders) {
+        this.bookOrders = bookOrders;
     }
 
-    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
+    @OneToMany
     public Set<Review> getReviews() {
         return reviews;
     }

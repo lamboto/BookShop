@@ -1,6 +1,7 @@
 package bookstore.domain.entitites;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Set;
         @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email"),
         @NamedQuery(name = "Customer.checkLogin", query = "select c from Customer c where c.email = :email and c.password = :password")
 })
-public class Customer {
+public class Customer implements Serializable {
     private int customerId;
     private String email;
     private String fullName;
@@ -26,7 +27,7 @@ public class Customer {
     private String zipcode;
     private String password;
     private Date registerDate;
-    private Set<BookOrder> bookOrderByCustomerId;
+    private Set<BookOrder> bookOrders;
     private Set<Review> reviews;
 
     public Customer() {
@@ -133,34 +134,23 @@ public class Customer {
         this.registerDate = registerDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return customerId == customer.customerId && Objects.equals(email, customer.email) && Objects.equals(fullName, customer.fullName) && Objects.equals(address, customer.address) && Objects.equals(city, customer.city) && Objects.equals(country, customer.country) && Objects.equals(phone, customer.phone) && Objects.equals(zipcode, customer.zipcode) && Objects.equals(password, customer.password) && Objects.equals(registerDate, customer.registerDate);
+
+
+    @OneToMany(mappedBy = "customer")
+    public Set<BookOrder> getBookOrders() {
+        return bookOrders;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerId, email, fullName, address, city, country, phone, zipcode, password, registerDate);
+    public void setBookOrders(Set<BookOrder> bookOrders) {
+        this.bookOrders = bookOrders;
     }
 
-    @OneToMany(mappedBy = "customersByCustomerId",fetch = FetchType.EAGER)
-    public Set<BookOrder> getBookOrdersByCustomerId() {
-        return bookOrderByCustomerId;
-    }
-
-    public void setBookOrdersByCustomerId(Set<BookOrder> bookOrderByCustomerId) {
-        this.bookOrderByCustomerId = bookOrderByCustomerId;
-    }
-
-    @OneToMany
-    public Set<Review> getReviewsByCustomerId() {
+    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviewsByCustomerId(Set<Review> reviewByCustomerId) {
-        this.reviews = reviewByCustomerId;
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
     }
 }

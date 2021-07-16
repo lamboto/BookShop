@@ -12,7 +12,7 @@ import java.util.Objects;
         @NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email = :email"),
         @NamedQuery(name = "User.checkLogin", query = "select u from User u where u.email = :email and u.password = :password")
 })
-public class User {
+public class User implements Serializable{
     private int userId;
     private String email;
     private String fullName;
@@ -59,16 +59,4 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && Objects.equals(email, user.email) && Objects.equals(fullName, user.fullName) && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, email, fullName, password);
-    }
 }

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -17,8 +18,12 @@ public class BookOrder {
     private String paymentMethod;
     private double total;
     private String status;
-    private Customer customerByCustomerId;
-    private Collection<OrdersDetail> ordersDetailByOrderId;
+    private Customer customer;
+    private Set<Book> books;
+
+
+    public BookOrder() {
+    }
 
     @Id
     @Column(name = "order_id")
@@ -101,35 +106,27 @@ public class BookOrder {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookOrder that = (BookOrder) o;
-        return orderId == that.orderId && Double.compare(that.total, total) == 0 && Objects.equals(orderDate, that.orderDate) && Objects.equals(shippingAddress, that.shippingAddress) && Objects.equals(recipientName, that.recipientName) && Objects.equals(recipientPhone, that.recipientPhone) && Objects.equals(paymentMethod, that.paymentMethod) && Objects.equals(status, that.status);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(orderId, orderDate, shippingAddress, recipientName, recipientPhone, paymentMethod, total, status);
-    }
-
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    public Customer getCustomersByCustomerId() {
-        return customerByCustomerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomersByCustomerId(Customer customerByCustomerId) {
-        this.customerByCustomerId = customerByCustomerId;
+    public void setCustomer(Customer customerByCustomerId) {
+        this.customer = customerByCustomerId;
     }
 
-    @OneToMany(mappedBy = "bookOrdersByOrderId")
-    public Collection<OrdersDetail> getOrdersDetailsByOrderId() {
-        return ordersDetailByOrderId;
+    @ManyToMany
+    @JoinTable(
+            name = "orders_details",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void setOrdersDetailsByOrderId(Collection<OrdersDetail> ordersDetailByOrderId) {
-        this.ordersDetailByOrderId = ordersDetailByOrderId;
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }

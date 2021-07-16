@@ -1,11 +1,6 @@
 package bookstore.domain.servicemodels;
 
-import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.OrdersDetail;
-import bookstore.domain.entitites.Review;
-
 import java.util.Date;
-import java.util.Set;
 
 public class BookServiceModel {
     private int bookId;

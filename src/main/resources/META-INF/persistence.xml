@@ -9,8 +9,8 @@
         <class>bookstore.domain.entitites.Book</class>
         <class>bookstore.domain.entitites.Category</class>
         <class>bookstore.domain.entitites.OrdersDetail</class>
-        <class>bookstore.domain.entitites.Review</class>
         <class>bookstore.domain.entitites.User</class>
+        <class>bookstore.domain.entitites.Review</class>
 
 
         <properties>

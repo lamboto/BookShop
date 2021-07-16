@@ -1,6 +1,7 @@
 package bookstore.domain.entitites;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
         @NamedQuery(name = "Category.count", query = "select count(c.categoryId) from Category c"),
         @NamedQuery(name = "Category.findByName", query = "select c from Category c where c.name = :name")
 })
-public class Category {
+public class Category implements Serializable {
     private int categoryId;
     private String name;
     private Set<Book> books;

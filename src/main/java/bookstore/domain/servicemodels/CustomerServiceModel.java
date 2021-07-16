@@ -4,7 +4,7 @@ import bookstore.domain.entitites.BookOrder;
 import bookstore.domain.entitites.Review;
 
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.Set;
 
 public class CustomerServiceModel {
 
@@ -18,8 +18,8 @@ public class CustomerServiceModel {
     private String zipcode;
     private String password;
     private Timestamp registerDate;
-    private Collection<BookOrder> bookOrderByCustomerId;
-    private Collection<Review> reviews;
+    private Set<BookOrder> bookOrderByCustomerId;
+    private Set<Review> reviews;
 
     public CustomerServiceModel() {
     }
@@ -104,19 +104,19 @@ public class CustomerServiceModel {
         this.registerDate = registerDate;
     }
 
-    public Collection<BookOrder> getBookOrderByCustomerId() {
+    public Set<BookOrder> getBookOrderByCustomerId() {
         return bookOrderByCustomerId;
     }
 
-    public void setBookOrderByCustomerId(Collection<BookOrder> bookOrderByCustomerId) {
+    public void setBookOrderByCustomerId(Set<BookOrder> bookOrderByCustomerId) {
         this.bookOrderByCustomerId = bookOrderByCustomerId;
     }
 
-    public Collection<Review> getReviews() {
+    public Set<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Collection<Review> reviews) {
+    public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
     }
 }
