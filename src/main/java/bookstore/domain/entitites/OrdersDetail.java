@@ -26,7 +26,7 @@ public class OrdersDetail {
     }
 
     @Basic
-    @Column(name = "quantity")
+    @Column(name = "quantity",nullable = false)
     public int getQuantity() {
         return quantity;
     }
@@ -36,7 +36,7 @@ public class OrdersDetail {
     }
 
     @Basic
-    @Column(name = "subtotal")
+    @Column(name = "subtotal",nullable = false)
     public double getSubtotal() {
         return subtotal;
     }

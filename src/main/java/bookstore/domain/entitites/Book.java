@@ -33,7 +33,7 @@ public class Book implements Serializable {
     private String base64Image;
 
     @Id
-    @Column(name = "book_id")
+    @Column(name = "book_id",unique = true,nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getBookId() {
         return bookId;
@@ -55,7 +55,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "title")
+    @Column(name = "title",nullable = false)
     public String getTitle() {
         return title;
     }
@@ -65,7 +65,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "author")
+    @Column(name = "author",nullable = false)
     public String getAuthor() {
         return author;
     }
@@ -75,7 +75,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "description")
+    @Column(name = "description",nullable = false)
     public String getDescription() {
         return description;
     }
@@ -85,7 +85,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "isbn")
+    @Column(name = "isbn",nullable = false)
     public String getIsbn() {
         return isbn;
     }
@@ -95,7 +95,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "image")
+    @Column(name = "image",nullable = false)
     public byte[] getImage() {
         return image;
     }
@@ -115,7 +115,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "publish_date")
+    @Column(name = "publish_date",nullable = false)
     public Date getPublishDate() {
         return publishDate;
     }

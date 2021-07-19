@@ -20,8 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ReviewTest {
 
@@ -66,6 +65,31 @@ public class ReviewTest {
         assertTrue(savedReview.getReviewId() > 0);
     }
 
+    @Test
+    public void testGet() {
+        int reviewId = 1;
+
+        Review review = reviewRepository.get(reviewId);
+
+        assertNotNull(review);
+    }
+
+    @Test
+    public void testUpdateReview() {
+        int reviewId = 1;
+        Review review = reviewRepository.get(reviewId);
+        review.setHeadline("Ex book");
+
+        Review updatedReview = reviewRepository.update(review);
+
+        assertEquals(review.getHeadline(), updatedReview.getHeadline());
+    }
+
+    @Test
+    public void listAllTestReview() {
+
+        assertTrue(reviewRepository.listAll().size() > 0);
+    }
 
     @AfterClass
     public static void tearDownClass() {

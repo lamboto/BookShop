@@ -26,7 +26,7 @@ public class BookOrder {
     }
 
     @Id
-    @Column(name = "order_id")
+    @Column(name = "order_id",unique = true,nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getOrderId() {
         return orderId;

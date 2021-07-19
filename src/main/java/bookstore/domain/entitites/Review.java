@@ -28,7 +28,7 @@ public class Review {
     private Customer customer;
 
     @Id
-    @Column(name = "review_id")
+    @Column(name = "review_id",unique = true,nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getReviewId() {
         return reviewId;
@@ -39,7 +39,7 @@ public class Review {
     }
 
     @Basic
-    @Column(name = "rating")
+    @Column(name = "rating",nullable = false)
     public int getRating() {
         return rating;
     }
@@ -49,7 +49,7 @@ public class Review {
     }
 
     @Basic
-    @Column(name = "headline")
+    @Column(name = "headline",nullable = false)
     public String getHeadline() {
         return headline;
     }
@@ -69,7 +69,7 @@ public class Review {
     }
 
     @Basic
-    @Column(name = "review_time")
+    @Column(name = "review_time",nullable = false)
     public Date getReviewTime() {
         return reviewTime;
     }
@@ -80,7 +80,7 @@ public class Review {
 
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id",nullable = false)
     public Book getBook() {
         return book;
     }
@@ -90,7 +90,7 @@ public class Review {
     }
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id",nullable = false)
     public Customer getCustomer() {
         return customer;
     }

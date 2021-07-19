@@ -33,7 +33,7 @@ public class Customer {
     }
 
     @Id
-    @Column(name = "customer_id")
+    @Column(name = "customer_id",unique = false,nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getCustomerId() {
         return customerId;
@@ -44,7 +44,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     public String getEmail() {
         return email;
     }
@@ -54,7 +54,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "full_name")
+    @Column(name = "full_name",nullable = false)
     public String getFullName() {
         return fullName;
     }
@@ -64,7 +64,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address",nullable = false)
     public String getAddress() {
         return address;
     }
@@ -74,7 +74,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city",nullable = false)
     public String getCity() {
         return city;
     }
@@ -84,7 +84,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "country")
+    @Column(name = "country",nullable = false)
     public String getCountry() {
         return country;
     }
@@ -94,7 +94,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "phone")
+    @Column(name = "phone",nullable = false)
     public String getPhone() {
         return phone;
     }
@@ -104,7 +104,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "zipcode")
+    @Column(name = "zipcode",nullable = false)
     public String getZipcode() {
         return zipcode;
     }
@@ -114,7 +114,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     public String getPassword() {
         return password;
     }
@@ -124,7 +124,7 @@ public class Customer {
     }
 
     @Basic
-    @Column(name = "register_date")
+    @Column(name = "register_date",nullable = false)
     public Date getRegisterDate() {
         return registerDate;
     }
