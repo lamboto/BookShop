@@ -23,13 +23,17 @@ import java.util.stream.Collectors;
 @WebServlet("/admin/list_books")
 public class ListAllBookServlet extends HttpServlet {
 
-    private final Mapper mapper = new Mapper();
+    private final Mapper mapper;
+    private final BookServiceImpl bookService;
+
+    public ListAllBookServlet() {
+        this.mapper = new Mapper();
+        this.bookService = new BookServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        BookServiceImpl bookService = new BookServiceImpl();
 
         List<BookServiceModel> aLlBooks = bookService.findALl();
 

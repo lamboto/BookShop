@@ -1,7 +1,4 @@
-import bookstore.domain.entitites.Book;
-import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.Customer;
-import bookstore.domain.entitites.Review;
+import bookstore.domain.entitites.*;
 import bookstore.repository.BookRepository;
 import bookstore.repository.CustomerRepository;
 import bookstore.repository.ReviewRepository;
@@ -45,7 +42,7 @@ public class ReviewTest {
     @Test
     public void testCreateReview() throws ParseException, IOException {
         Review review = new Review();
-        review.setRating(5);
+        review.setRating(5.0);
         review.setHeadline("Ludi hora");
         review.setComment("Losho izpulneno");
         review.setReviewTime(new Date());
@@ -89,6 +86,22 @@ public class ReviewTest {
     public void listAllTestReview() {
 
         assertTrue(reviewRepository.listAll().size() > 0);
+    }
+
+    @Test
+    public void countTestReview() {
+        long count = reviewRepository.count();
+
+        assertEquals(1, count);
+    }
+
+    @Test
+    public void testDeleteReview() {
+        int reviewId = 1;
+
+        reviewRepository.delete(reviewId);
+        Review review = reviewRepository.get(reviewId);
+        assertNull(review);
     }
 
     @AfterClass

@@ -1,12 +1,7 @@
 package bookstore.service.impl;
 
-import bookstore.domain.entitites.Book;
-import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.Customer;
-import bookstore.repository.BookRepository;
-import bookstore.repository.CategoryRepository;
-import bookstore.repository.CustomerRepository;
-import bookstore.repository.UserRepository;
+import bookstore.domain.entitites.*;
+import bookstore.repository.*;
 import bookstore.service.ValidationService;
 
 import javax.persistence.EntityManager;
@@ -14,8 +9,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import bookstore.domain.entitites.User;
 
 public class ValidationServiceImpl implements ValidationService {
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -26,12 +19,14 @@ public class ValidationServiceImpl implements ValidationService {
     private final CategoryRepository categoryRepository;
     private final BookRepository bookRepository;
     private final CustomerRepository customerRepository;
+    private final ReviewRepository reviewRepository;
 
     public ValidationServiceImpl() {
         this.userRepository = new UserRepository();
         this.categoryRepository = new CategoryRepository();
         this.bookRepository = new BookRepository();
         this.customerRepository = new CustomerRepository();
+        this.reviewRepository = new ReviewRepository();
     }
 
 
@@ -57,8 +52,6 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
 
-
-
     @Override
     public boolean canCreateUser(String email) {
         return isEmailValid(email);
@@ -72,6 +65,16 @@ public class ValidationServiceImpl implements ValidationService {
     @Override
     public boolean canCreateCategory(String email) {
         return isCategoryNameExist(email);
+    }
+
+    public boolean isReviewValidToDelete(int id) {
+        Review review = this.reviewRepository.get(id);
+
+        if (review != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isBookValidToDelete(int id) {

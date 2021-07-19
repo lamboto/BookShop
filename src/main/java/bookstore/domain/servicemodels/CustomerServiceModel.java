@@ -18,7 +18,7 @@ public class CustomerServiceModel {
     private String zipcode;
     private String password;
     private Timestamp registerDate;
-    private Set<BookOrder> bookOrderByCustomerId;
+    private Set<BookOrder> bookOrders;
     private Set<Review> reviews;
 
     public CustomerServiceModel() {
@@ -104,12 +104,12 @@ public class CustomerServiceModel {
         this.registerDate = registerDate;
     }
 
-    public Set<BookOrder> getBookOrderByCustomerId() {
-        return bookOrderByCustomerId;
+    public Set<BookOrder> getBookOrders() {
+        return bookOrders;
     }
 
-    public void setBookOrderByCustomerId(Set<BookOrder> bookOrderByCustomerId) {
-        this.bookOrderByCustomerId = bookOrderByCustomerId;
+    public void setBookOrders(Set<BookOrder> bookOrders) {
+        this.bookOrders = bookOrders;
     }
 
     public Set<Review> getReviews() {

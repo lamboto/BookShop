@@ -20,7 +20,7 @@ import java.util.Objects;
 })
 public class Review {
     private int reviewId;
-    private int rating;
+    private double rating;
     private String headline;
     private String comment;
     private Date reviewTime;
@@ -28,7 +28,7 @@ public class Review {
     private Customer customer;
 
     @Id
-    @Column(name = "review_id",unique = true,nullable = false)
+    @Column(name = "review_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getReviewId() {
         return reviewId;
@@ -38,18 +38,19 @@ public class Review {
         this.reviewId = reviewId;
     }
 
+
     @Basic
-    @Column(name = "rating",nullable = false)
-    public int getRating() {
+    @Column(name = "rating", nullable = false)
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
     @Basic
-    @Column(name = "headline",nullable = false)
+    @Column(name = "headline", nullable = false)
     public String getHeadline() {
         return headline;
     }
@@ -69,7 +70,7 @@ public class Review {
     }
 
     @Basic
-    @Column(name = "review_time",nullable = false)
+    @Column(name = "review_time", nullable = false)
     public Date getReviewTime() {
         return reviewTime;
     }
@@ -79,8 +80,8 @@ public class Review {
     }
 
 
-    @ManyToOne
-    @JoinColumn(name = "book_id",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id", nullable = false)
     public Book getBook() {
         return book;
     }
@@ -89,8 +90,8 @@ public class Review {
         this.book = book;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", nullable = false)
     public Customer getCustomer() {
         return customer;
     }
