@@ -17,7 +17,7 @@ public interface ReviewService {
 
     void delete(int id) throws Exception;
 
-    void updateReview(ReviewServiceModel reviewServiceModel) throws Exception;
+    void updateReview(Review review) throws Exception;
 
     Review getById(int id);
 

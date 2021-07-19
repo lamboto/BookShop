@@ -66,4 +66,12 @@ public class CustomerRepository extends JpaRepository<Customer> implements Gener
         }
         return null;
     }
+
+    public Customer findCustomerByName(String name) {
+        List<Customer> listCustomers = super.findWithNamedQuery("Customer.findByFullName", "fullName", name);
+        if (listCustomers != null && listCustomers.size() > 0) {
+            return listCustomers.get(0);
+        }
+        return null;
+    }
 }

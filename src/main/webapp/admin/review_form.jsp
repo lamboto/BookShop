@@ -17,7 +17,7 @@
 </header>
 <div align="center">
     <h2>
-            <h2>Edit Review</h2>
+        <h2>Edit Review</h2>
     </h2>
 </div>
 <br>
@@ -25,33 +25,39 @@
     <form action="edit_review" method="post" onsubmit="return validateInputForm()">
         <input type="hidden" name="reviewId" value="${review.reviewId}">
 
-            <table>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" name="email" id="email" size="20"
-                               value="<c:out value='${user.email}' />"></td>
-                </tr>
-                <tr>
-                    <td>Full Name:</td>
-                    <td><input type="text" name="fullname" id="fullname" size="20"
-                               value="<c:out value='${user.fullName}' />"></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password" id="password" size="20"
-                               value="<c:out value='${user.password}' />"></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="Save">
-                        <input type="submit" value="Cancel">
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <table>
+            <tr>
+                <td>Book:</td>
+                <td><b>${review.book.title}</b></td>
+            </tr>
+            <tr>
+                <td>Rating:</td>
+                <td><b>${review.rating}</b></td>
+            </tr>
+            <tr>
+                <td>Customer:</td>
+                <td><b>${review.customer.fullName}</b></td>
+            </tr>
+            <tr>
+                <td>Headline:</td>
+                <td><input type="text" name="headline" id="headline" size="20"
+                           value="<c:out value='${review.headline}' />"></td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td><textarea rows="5" cols="70" name="comment">${review.comment}</textarea></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save">
+                    <input type="button" id="buttonCancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 
 <footer>
@@ -59,27 +65,11 @@
 </footer>
 </body>
 <script type="text/javascript">
-    function validateInputForm() {
-        let fieldEmail = document.getElementById("email");
-        let fieldFullname = document.getElementById("fullname");
-        let fieldPassowrd = document.getElementById("password");
-
-        if (fieldEmail.value.length === 0) {
-            alert("Email is required")
-            fieldEmail.focus();
-            return false;
-        }
-        if (fieldFullname.value.length === 0) {
-            alert("Fullname is required")
-            fieldEmail.focus();
-            return false;
-        }
-        if (fieldPassowrd.value.length === 0) {
-            alert("Passowrd is required")
-            fieldEmail.focus();
-            return false;
-        }
-    }
+    $(document).ready(function (){
+        $("#buttonCancel").click(function (){
+            history.go(-1);
+        })
+    })
 
 </script>
 </html>

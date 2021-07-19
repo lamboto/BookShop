@@ -13,7 +13,8 @@ import java.util.Set;
         @NamedQuery(name = "Customer.findAll", query = "select c from Customer c order by c.registerDate desc"),
         @NamedQuery(name = "Customer.count", query = "select count(c.customerId) from Customer c"),
         @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email"),
-        @NamedQuery(name = "Customer.checkLogin", query = "select c from Customer c where c.email = :email and c.password = :password")
+        @NamedQuery(name = "Customer.checkLogin", query = "select c from Customer c where c.email = :email and c.password = :password"),
+        @NamedQuery(name = "Customer.findByFullName", query = "select c from Customer c where c.fullName = : fullName")
 })
 public class Customer {
     private int customerId;

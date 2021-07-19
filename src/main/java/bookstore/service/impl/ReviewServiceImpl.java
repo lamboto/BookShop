@@ -50,9 +50,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void updateReview(ReviewServiceModel reviewServiceModel) throws Exception {
-
+    public void updateReview(Review review) throws Exception {
+        this.reviewRepository.update(review);
     }
+
 
     @Override
     public Review getById(int id) {

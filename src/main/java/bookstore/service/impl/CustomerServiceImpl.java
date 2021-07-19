@@ -37,13 +37,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(Customer customer) throws Exception {
-
         this.customerRepository.update(customer);
     }
 
     @Override
     public Customer findCustomerByName(String name) {
-        return null;
+        return this.customerRepository.findCustomerByName(name);
     }
 
     @Override

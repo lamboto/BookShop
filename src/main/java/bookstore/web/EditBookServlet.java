@@ -2,11 +2,7 @@ package bookstore.web;
 
 import bookstore.domain.entitites.Book;
 import bookstore.domain.entitites.Category;
-import bookstore.domain.entitites.User;
-import bookstore.domain.servicemodels.CategoryServiceModel;
 import bookstore.domain.view.EditBookViewModel;
-import bookstore.domain.view.EditCategoryViewModel;
-import bookstore.domain.view.ListAllCategoryViewModel;
 import bookstore.service.impl.BookServiceImpl;
 import bookstore.service.impl.CategoryServiceImpl;
 import config.Mapper;
@@ -19,13 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/admin/edit_book")
 @MultipartConfig(
@@ -35,8 +28,16 @@ import java.util.stream.Collectors;
 )
 public class EditBookServlet extends HttpServlet {
 
-    private final BookServiceImpl bookService = new BookServiceImpl();
-    private final Mapper mapper = new Mapper();
+    private final BookServiceImpl bookService;
+    private final Mapper mapper;
+    private final CategoryServiceImpl categoryService;
+
+    public EditBookServlet() {
+        this.bookService = new BookServiceImpl();
+        this.mapper = new Mapper();
+        this.categoryService = new CategoryServiceImpl();
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +53,7 @@ public class EditBookServlet extends HttpServlet {
 
 
         req.getRequestDispatcher("book_form.jsp")
-        .forward(req,resp);
+                .forward(req, resp);
     }
 
     @Override
@@ -61,7 +62,6 @@ public class EditBookServlet extends HttpServlet {
 
         String message = "";
 
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
         int categoryId = Integer.parseInt(req.getParameter("category"));
         Category category = categoryService.getById(categoryId);
 
@@ -88,8 +88,8 @@ public class EditBookServlet extends HttpServlet {
 
         Book bookById = this.bookService.getById(id);
         Book bookByTitle = this.bookService.findBookByTitle(title);
-        
-        if (bookByTitle != null && bookById.getBookId()!= bookByTitle.getBookId()) {
+
+        if (bookByTitle != null && bookById.getBookId() != bookByTitle.getBookId()) {
             message = "Could not update book with this title: " + title + " because already exist!";
             req.setAttribute("message", message);
             req.getRequestDispatcher("message.jsp")
