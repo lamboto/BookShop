@@ -60,11 +60,17 @@ public class EditReviewServlet extends HttpServlet {
         review.setHeadline(headline);
         review.setComment(comment);
 
+        String message = "";
+
+
         try {
             this.reviewService.updateReview(review);
             resp.sendRedirect("/admin/list_reviews");
         } catch (Exception e) {
-            resp.sendRedirect("/admin/edit_review");
+            message = "Could not find review with ID: " + id;
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("message.jsp")
+                    .forward(req, resp);
         }
     }
 }
