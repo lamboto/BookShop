@@ -54,8 +54,8 @@
 </body>
 <script>
     function confirmDelete(categoryId) {
-        if (confirm("Are you sure you want to delete the category with ID "+categoryId+"?")){
-            window.location='delete_category?id='+categoryId;
+        if (confirm("Are you sure you want to delete the category with ID " + categoryId + "?")) {
+            window.location = 'delete_category?id=' + categoryId;
         }
     }
 </script>

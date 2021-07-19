@@ -113,8 +113,8 @@ public class BookOrder {
         return customer;
     }
 
-    public void setCustomer(Customer customerByCustomerId) {
-        this.customer = customerByCustomerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @ManyToMany

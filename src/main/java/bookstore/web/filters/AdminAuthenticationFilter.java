@@ -45,12 +45,6 @@ public class AdminAuthenticationFilter implements Filter {
         }*/
     }
 
-    public AdminAuthenticationFilter() {
-    }
 
-    public void destroy() {
-    }
 
-    public void init(FilterConfig fConfig) throws ServletException {
-    }
 }

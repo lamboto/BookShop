@@ -1,7 +1,6 @@
 package bookstore.domain.entitites;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
@@ -16,7 +15,7 @@ import java.util.Set;
         @NamedQuery(name = "Customer.findByEmail", query = "select c from Customer c where c.email = : email"),
         @NamedQuery(name = "Customer.checkLogin", query = "select c from Customer c where c.email = :email and c.password = :password")
 })
-public class Customer implements Serializable {
+public class Customer {
     private int customerId;
     private String email;
     private String fullName;
@@ -134,9 +133,20 @@ public class Customer implements Serializable {
         this.registerDate = registerDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return customerId == customer.customerId && Objects.equals(email, customer.email) && Objects.equals(fullName, customer.fullName) && Objects.equals(address, customer.address) && Objects.equals(city, customer.city) && Objects.equals(country, customer.country) && Objects.equals(phone, customer.phone) && Objects.equals(zipcode, customer.zipcode) && Objects.equals(password, customer.password) && Objects.equals(registerDate, customer.registerDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, email, fullName, address, city, country, phone, zipcode, password, registerDate);
+    }
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
     public Set<BookOrder> getBookOrders() {
         return bookOrders;
     }
