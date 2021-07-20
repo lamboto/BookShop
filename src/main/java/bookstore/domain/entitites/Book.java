@@ -1,4 +1,5 @@
 package bookstore.domain.entitites;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -13,9 +14,9 @@ import java.sql.Timestamp;
         @NamedQuery(name = "Book.count", query = "select count(b.bookId) from Book b"),
         @NamedQuery(name = "Book.findByCategory", query = "select b from Book b where b.category.categoryId = :categoryId"),
         @NamedQuery(name = "Book.findByPublishDate", query = "select b from Book b order by b.publishDate desc "),
-        @NamedQuery(name = "Book.findByKeyword",query = "select b from Book b where b.title like :keyword"+
-        " or b.author like :keyword"+
-        " or b.description like :keyword")
+        @NamedQuery(name = "Book.findByKeyword", query = "select b from Book b where b.title like :keyword" +
+                " or b.author like :keyword" +
+                " or b.description like :keyword")
 })
 public class Book implements Serializable {
     private int bookId;
@@ -33,7 +34,7 @@ public class Book implements Serializable {
     private String base64Image;
 
     @Id
-    @Column(name = "book_id",unique = true,nullable = false)
+    @Column(name = "book_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getBookId() {
         return bookId;
@@ -41,6 +42,58 @@ public class Book implements Serializable {
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
+    }
+
+    @Transient
+    public float getAverageRating() {
+        float averageRating = 0.0f;
+        float sum = 0.0f;
+
+        if (reviews == null) {
+            return 0.0f;
+        }
+
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+
+        averageRating = sum / this.reviews.size();
+
+        // averageRating = (float) this.reviews.stream().mapToDouble(Review::getRating)
+        //             .average().orElse(Double.NaN);
+
+        return averageRating;
+    }
+
+    @Transient
+    public String getRatingString(float averageRating) {
+        String result = "";
+
+        int numberOfStarsOn = (int) averageRating;
+
+        for (int i = 1; i <= numberOfStarsOn; i++) {
+            result += "on,";
+        }
+        int next = numberOfStarsOn + 1;
+
+        if (averageRating > numberOfStarsOn) {
+            result += "half,";
+            next++;
+        }
+
+        for (int j = next; j <= 5; j++) {
+            result += "off,";
+        }
+
+
+        return result.substring(0, result.length() - 1);
+    }
+
+    @Transient
+    public String getRatingStars() {
+        float averageRating = getAverageRating();
+
+        return getRatingString(averageRating);
     }
 
     @Transient
@@ -55,7 +108,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "title",nullable = false)
+    @Column(name = "title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -65,7 +118,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "author",nullable = false)
+    @Column(name = "author", nullable = false)
     public String getAuthor() {
         return author;
     }
@@ -75,7 +128,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "description",nullable = false)
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -85,7 +138,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "isbn",nullable = false)
+    @Column(name = "isbn", nullable = false)
     public String getIsbn() {
         return isbn;
     }
@@ -95,7 +148,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "image",nullable = false)
+    @Column(name = "image", nullable = false)
     public byte[] getImage() {
         return image;
     }
@@ -115,7 +168,7 @@ public class Book implements Serializable {
     }
 
     @Basic
-    @Column(name = "publish_date",nullable = false)
+    @Column(name = "publish_date", nullable = false)
     public Date getPublishDate() {
         return publishDate;
     }
@@ -159,7 +212,7 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     public Set<OrdersDetail> getOrdersDetails() {
         return ordersDetails;
     }
@@ -168,7 +221,7 @@ public class Book implements Serializable {
         this.ordersDetails = ordersDetails;
     }
 
-    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
     public Set<Review> getReviews() {
         return reviews;
     }

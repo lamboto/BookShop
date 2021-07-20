@@ -1,6 +1,7 @@
 package bookstore.domain.servicemodels;
 
 import java.util.Date;
+import java.util.Set;
 
 public class BookServiceModel {
     private int bookId;
@@ -14,6 +15,7 @@ public class BookServiceModel {
     private Date lastUpdateTime;
     private CategoryServiceModel category;
     private String base64Image;
+    private Set<ReviewServiceModel> reviews;
 
     public BookServiceModel() {
     }
@@ -104,5 +106,13 @@ public class BookServiceModel {
 
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
+    }
+
+    public Set<ReviewServiceModel> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<ReviewServiceModel> reviews) {
+        this.reviews = reviews;
     }
 }

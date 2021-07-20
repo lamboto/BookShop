@@ -31,8 +31,20 @@
                         <b>${book.title}</b>
                     </a>
                 </div>
-                <div>Rating *****</div>
-                <div><i></i>by ${book.author}</div>
+                <div>
+                    <c:forTokens items="${book.ratingStars}" delims="," var="star">
+                        <c:if test="${star eq 'on'}">
+                            <img src="resources/images/rating_on.png"/>
+                        </c:if>
+                        <c:if test="${star eq 'off'}">
+                            <img src="resources/images/rating_off.png"/>
+                        </c:if>
+                        <c:if test="${star eq 'half'}">
+                            <img src="resources/images/rating_half.png"/>
+                        </c:if>
+                    </c:forTokens>
+                </div>
+                <div><i>by ${book.author}</i></div>
                 <div><b>$${book.price}</b></div>
             </div>
         </c:forEach>
