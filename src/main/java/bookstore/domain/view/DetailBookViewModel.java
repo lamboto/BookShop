@@ -3,7 +3,9 @@ package bookstore.domain.view;
 import bookstore.domain.entitites.Category;
 import bookstore.domain.entitites.OrdersDetail;
 import bookstore.domain.entitites.Review;
+import bookstore.domain.servicemodels.ReviewServiceModel;
 
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,12 +21,63 @@ public class DetailBookViewModel {
     private Date lastUpdateTime;
     private Category category;
     private Set<OrdersDetail> ordersDetails;
-    private Set<Review> reviews;
+    private Set<ReviewServiceModel> reviews;
     private String base64Image;
 
     public DetailBookViewModel() {
     }
 
+    @Transient
+    public float getAverageRating() {
+        float averageRating = 0.0f;
+        float sum = 0.0f;
+
+        if (reviews == null) {
+            return 0.0f;
+        }
+
+        for (ReviewServiceModel review : reviews) {
+            sum += review.getRating();
+        }
+
+        averageRating = sum / this.reviews.size();
+
+        // averageRating = (float) this.reviews.stream().mapToDouble(Review::getRating)
+        //             .average().orElse(Double.NaN);
+
+        return averageRating;
+    }
+
+    @Transient
+    public String getRatingString(float averageRating) {
+        String result = "";
+
+        int numberOfStarsOn = (int) averageRating;
+
+        for (int i = 1; i <= numberOfStarsOn; i++) {
+            result += "on,";
+        }
+        int next = numberOfStarsOn + 1;
+
+        if (averageRating > numberOfStarsOn) {
+            result += "half,";
+            next++;
+        }
+
+        for (int j = next; j <= 5; j++) {
+            result += "off,";
+        }
+
+
+        return result.substring(0, result.length() - 1);
+    }
+
+    @Transient
+    public String getRatingStars() {
+        float averageRating = getAverageRating();
+
+        return getRatingString(averageRating);
+    }
     public int getBookId() {
         return bookId;
     }
@@ -113,11 +166,11 @@ public class DetailBookViewModel {
         this.ordersDetails = ordersDetails;
     }
 
-    public Set<Review> getReviews() {
+    public Set<ReviewServiceModel> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Review> reviews) {
+    public void setReviews(Set<ReviewServiceModel> reviews) {
         this.reviews = reviews;
     }
 

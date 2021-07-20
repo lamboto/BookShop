@@ -26,7 +26,7 @@
                 <img src="data:image/jpg;base64,${book.base64Image}" width="240" height="300"/>
             </td>
             <td valign="top" align="left">
-                Rating *****
+                <jsp:directive.include file="book_rating.jsp"/>
             </td>
             <td valign="top" rowspan="2" width="20%">
                 <h2>$${book.price}</h2>
@@ -46,6 +46,34 @@
             <td><h2>Customer Reviews</h2></td>
             <td colspan="2" align="center">
                 <button>Write a Customer Review</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table border="0">
+                    <c:forEach items="${book.reviews}" var="review">
+                        <tr>
+                            <td>
+                                <c:forTokens items="${review.stars}" delims="," var="star">
+                                    <c:if test="${star eq 'on'}">
+                                        <img src="resources/images/rating_on.png"/>
+                                    </c:if>
+                                    <c:if test="${star eq 'off'}">
+                                        <img src="resources/images/rating_off.png"/>
+                                    </c:if>
+                                </c:forTokens>
+                                - <b>${review.headline}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <tr>
+                                by ${review.customer.fullName} on ${review.reviewTime}
+                            </tr>
+                        </tr>
+                        <tr><td><i>${review.comment}</i></td></tr>
+                        <tr><td>&nbsp;</td></tr>
+                    </c:forEach>
+                </table>
             </td>
         </tr>
     </table>

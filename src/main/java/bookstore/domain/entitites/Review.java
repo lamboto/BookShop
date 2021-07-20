@@ -38,6 +38,24 @@ public class Review {
         this.reviewId = reviewId;
     }
 
+    @Transient
+    public String getStars() {
+        String result = "";
+
+        int numberOfStarsOn = (int) rating;
+
+        for (int i = 1; i <= numberOfStarsOn; i++) {
+            result += "on,";
+        }
+
+
+        for (int j = numberOfStarsOn + 1; j <= 5; j++) {
+            result += "off,";
+        }
+
+
+        return result.substring(0, result.length() - 1);
+    }
 
     @Basic
     @Column(name = "rating", nullable = false)

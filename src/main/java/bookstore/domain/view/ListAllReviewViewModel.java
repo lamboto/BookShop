@@ -3,6 +3,7 @@ package bookstore.domain.view;
 import bookstore.domain.servicemodels.BookServiceModel;
 import bookstore.domain.servicemodels.CustomerServiceModel;
 
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class ListAllReviewViewModel {
