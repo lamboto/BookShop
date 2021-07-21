@@ -49,10 +49,10 @@ public class ReviewTest {
 
 
         Customer customer = new Customer();
-        customer.setCustomerId(5);
+        customer.setCustomerId(1);
 
         Book book = new Book();
-        book.setBookId(10);
+        book.setBookId(2);
 
         review.setCustomer(customer);
 

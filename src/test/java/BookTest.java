@@ -39,7 +39,7 @@ public class BookTest {
         Book book = new Book();
 
         Category category = new Category("Java");
-        category.setCategoryId(9);
+        category.setCategoryId(2);
 
         book.setCategory(category);
 
@@ -53,7 +53,7 @@ public class BookTest {
         Date publishDate = formatter.parse("05/28/2008");
         book.setPublishDate(publishDate);
 
-        String imagePath = "C:\\Users\\t_lamburov\\Desktop\\BookShop\\src\\main\\webapp\\resources\\images\\Effective Java.JPG";
+        String imagePath = "C:\\Users\\User\\Desktop\\Java 2021\\BookShop\\src\\main\\webapp\\resources\\images\\Head First Java.jpg";
         byte[] imageBytes = Files.readAllBytes(Path.of(imagePath));
         book.setImage(imageBytes);
 
