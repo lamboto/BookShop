@@ -3,7 +3,9 @@ package bookstore.repository;
 import bookstore.domain.entitites.Review;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReviewRepository extends JpaRepository<Review> implements GenericRepository<Review> {
 
@@ -41,5 +43,17 @@ public class ReviewRepository extends JpaRepository<Review> implements GenericRe
     @Override
     public long count() {
         return super.count("Review.count");
+    }
+
+    public Review findBYCustomerAndBook(int customerId, int bookId) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("customerId", customerId);
+        parameters.put("bookId", bookId);
+
+        List<Review> result = super.findWithNamedQuery("Review.findByCustomerAndBook", parameters);
+        if (!result.isEmpty()) {
+            return result.get(0);
+        }
+        return null;
     }
 }
