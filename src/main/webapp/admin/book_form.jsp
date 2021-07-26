@@ -89,7 +89,7 @@
                                value="<fmt:formatDate pattern='MM/dd/yyyy' value='${book.publishDate}' />"></td>
                 </tr>
                 <tr>
-                    <td>Image:</td>
+                    <td>Book Image:</td>
                     <td>
                         <input type="file" name="image" id="image" size="20"/>
                         <img id="thumbnail" alt="Image Preview" style="width: 20%; margin-top:10%"

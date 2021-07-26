@@ -42,14 +42,14 @@ public class ReviewTest {
     @Test
     public void testCreateReview() throws ParseException, IOException {
         Review review = new Review();
-        review.setRating(3.6);
-        review.setHeadline("Ludi hora");
-        review.setComment("Losho izpulneno");
+        review.setRating(5);
+        review.setHeadline("Drugo si ehora");
+        review.setComment("Pedalii izpulneno");
         review.setReviewTime(new Date());
 
 
         Customer customer = new Customer();
-        customer.setCustomerId(1);
+        customer.setCustomerId(2);
 
         Book book = new Book();
         book.setBookId(2);

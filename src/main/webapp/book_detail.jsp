@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title>${book.title}- Online Books Store</title>
@@ -26,7 +27,8 @@
                 <img src="data:image/jpg;base64,${book.base64Image}" width="240" height="300"/>
             </td>
             <td valign="top" align="left">
-                <jsp:directive.include file="book_rating.jsp"/>
+                <jsp:directive.include file="book_rating.jsp"/>&nbsp;&nbsp;
+                <a href="#reviews">${fn:length(book.reviews)}Reviews</a>
             </td>
             <td valign="top" rowspan="2" width="20%">
                 <h2>$${book.price}</h2>
@@ -43,7 +45,7 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td><h2>Customer Reviews</h2></td>
+            <td><h2><a id="reviews">Customer Reviews</a></h2></td>
             <td colspan="2" align="center">
                 <button>Write a Customer Review</button>
             </td>
@@ -66,9 +68,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <tr>
+                            <td>
                                 by ${review.customer.fullName} on ${review.reviewTime}
-                            </tr>
+                            </td>
                         </tr>
                         <tr><td><i>${review.comment}</i></td></tr>
                         <tr><td>&nbsp;</td></tr>

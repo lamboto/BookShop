@@ -110,10 +110,10 @@ public class BookServiceImpl implements BookService {
     }
 
     public byte[] getBytes(Part part) throws IOException {
-        byte[] imageBytes = null;
+        byte[] imageBytes =null;
         if (part != null && part.getSize() > 0) {
             long size = part.getSize();
-            imageBytes = new byte[(int) size];
+             imageBytes = new byte[(int) size];
 
             InputStream inputStream = part.getInputStream();
             inputStream.read(imageBytes);

@@ -3,6 +3,7 @@ package bookstore.domain.view;
 import bookstore.domain.entitites.Category;
 import bookstore.domain.entitites.OrdersDetail;
 import bookstore.domain.entitites.Review;
+import bookstore.domain.servicemodels.ReviewServiceModel;
 
 import java.util.Date;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class EditBookViewModel {
     private Date lastUpdateTime;
     private Category category;
     private Set<OrdersDetail> ordersDetails;
-    private Set<Review> reviews;
+    private Set<ReviewServiceModel> reviews;
     private String base64Image;
 
     public EditBookViewModel() {
@@ -113,11 +114,11 @@ public class EditBookViewModel {
         this.ordersDetails = ordersDetails;
     }
 
-    public Set<Review> getReviews() {
+    public Set<ReviewServiceModel> getReviews() {
         return reviews;
     }
 
-    public void setReviews(Set<Review> reviews) {
+    public void setReviews(Set<ReviewServiceModel> reviews) {
         this.reviews = reviews;
     }
 

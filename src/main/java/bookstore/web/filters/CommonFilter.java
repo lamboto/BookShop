@@ -28,15 +28,15 @@ public class CommonFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-        if (!path.startsWith("/admin/")) {
+
             List<CategoryServiceModel> categoryServiceModel = categoryService.findALl();
 
             List<ListAllCategoryViewModel> categoryViewModels = categoryServiceModel.stream()
                     .map(e -> this.mapper.map(e, ListAllCategoryViewModel.class))
                     .collect(Collectors.toList());
 
-            request.setAttribute("allCategories", categoryViewModels);
-        }
+            request.setAttribute("allCategories",categoryViewModels);
+
         System.out.println("Common filter->doFilter");
 
         chain.doFilter(request, response);

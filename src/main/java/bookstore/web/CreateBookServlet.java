@@ -35,8 +35,15 @@ import java.util.stream.Collectors;
         maxRequestSize = 1024 * 1024
 )
 public class CreateBookServlet extends HttpServlet {
-    private final Mapper mapper = new Mapper();
-    private final BookServiceImpl bookService = new BookServiceImpl();
+    private final Mapper mapper;
+    private final BookServiceImpl bookService;
+    private final CategoryServiceImpl categoryService;
+
+    public CreateBookServlet() {
+        this.mapper = new Mapper();
+        this.bookService = new BookServiceImpl();
+        this.categoryService = new CategoryServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,7 +56,6 @@ public class CreateBookServlet extends HttpServlet {
     @Override
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CategoryServiceImpl categoryService = new CategoryServiceImpl();
         int categoryId = Integer.parseInt(req.getParameter("category"));
         Category category = categoryService.getById(categoryId);
         String title = req.getParameter("title");

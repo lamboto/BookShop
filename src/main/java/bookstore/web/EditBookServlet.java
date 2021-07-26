@@ -60,7 +60,7 @@ public class EditBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("bookId"));
 
-        String message = "";
+
 
         int categoryId = Integer.parseInt(req.getParameter("category"));
         Category category = categoryService.getById(categoryId);
@@ -88,6 +88,8 @@ public class EditBookServlet extends HttpServlet {
 
         Book bookById = this.bookService.getById(id);
         Book bookByTitle = this.bookService.findBookByTitle(title);
+
+        String message = "";
 
         if (bookByTitle != null && bookById.getBookId() != bookByTitle.getBookId()) {
             message = "Could not update book with this title: " + title + " because already exist!";
