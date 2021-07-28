@@ -21,4 +21,6 @@ public interface ReviewService {
 
     Review getById(int id);
 
+    ReviewServiceModel findBYCustomerAndBook(int customerId, int bookId);
+
 }

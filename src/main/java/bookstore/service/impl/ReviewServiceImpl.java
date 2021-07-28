@@ -60,5 +60,10 @@ public class ReviewServiceImpl implements ReviewService {
         return this.reviewRepository.get(id);
     }
 
+    @Override
+    public ReviewServiceModel findBYCustomerAndBook(int customerId, int bookId) {
+        return this.mapper.map(this.reviewRepository.findBYCustomerAndBook(customerId, bookId), ReviewServiceModel.class);
+    }
+
 
 }

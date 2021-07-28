@@ -7,9 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title>Write review - online Book Store</title>
+    <script src="resources/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 </head>
 <body>
 
@@ -18,7 +22,7 @@
 </header>
 
 <div align="center">
-    <form>
+    <form id="reviewForm" action="write_review" method="post">
         <table class="normal" width="60%">
             <tr>
                 <td><h2>Your Reviews</h2></td>
@@ -26,12 +30,32 @@
                 <td><h2>${loggedCustomer.fullName}</h2></td>
             </tr>
             <tr>
-                <td colspan="3"><hr/></td>
+                <td colspan="3">
+                    <hr/>
+                </td>
             </tr>
             <tr>
                 <td>
                     <h2>${book.title}</h2><br/>
                     <img src="data:image/jpg;base64,${book.base64Image}" width="240" height="300"/>
+                </td>
+                <td>
+                    <div id="rateYo"></div>
+                    <input type="hidden" id="rating" name="rating"/>
+                    <input type="hidden" name="bookId" value="${book.bookId}"/>
+                    <br/>
+                    <input type="text" name="headline" size="60"
+                           placeholder="Headline or summary for your review (required)"/>
+                    <br/>
+                    <br/>
+                    <textarea name="comment" cols="70" rows="10" placeholder="Write your review details.."></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <button type="submit">Submit</button>
+                    &nbsp;&nbsp;
+                    <button>Cancel</button>
                 </td>
             </tr>
         </table>
@@ -41,7 +65,20 @@
 <footer>
     <jsp:directive.include file="footer.jsp"/>
 </footer>
+<script>
+    $(function () {
 
+
+        $("#rateYo").rateYo({
+            starWidth: "40px",
+            fullStar: true,
+            onSet: function (rating, rateYoInstance) {
+                $("#rating").val(rating);
+            }
+        });
+
+    });
+</script>
 </body>
 </html>
 
