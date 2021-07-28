@@ -12,7 +12,7 @@ import java.io.IOException;
 public class CustomerLoginFilter implements Filter {
 
     private static final String[] LOGIN_REQUIRED_URLS = {
-            "/view_profile", "/edit_profile"
+            "/view_profile", "/edit_profile","/update_profile","/write_review"
     };
 
     @Override

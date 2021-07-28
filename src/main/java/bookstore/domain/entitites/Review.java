@@ -98,8 +98,8 @@ public class Review {
     }
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "book_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     public Book getBook() {
         return book;
     }

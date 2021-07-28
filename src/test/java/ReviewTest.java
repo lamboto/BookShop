@@ -43,16 +43,16 @@ public class ReviewTest {
     public void testCreateReview() throws ParseException, IOException {
         Review review = new Review();
         review.setRating(5);
-        review.setHeadline("Drugo si ehora");
-        review.setComment("Pedalii izpulneno");
+        review.setHeadline("Another one");
+        review.setComment("Ima Review Dobro e");
         review.setReviewTime(new Date());
 
 
         Customer customer = new Customer();
-        customer.setCustomerId(2);
+        customer.setCustomerId(5);
 
         Book book = new Book();
-        book.setBookId(2);
+        book.setBookId(10);
 
         review.setCustomer(customer);
 
@@ -103,6 +103,24 @@ public class ReviewTest {
         Review review = reviewRepository.get(reviewId);
         assertNull(review);
     }
+
+    @Test
+    public void testFindCustomerAndBookNotFound(){
+        int customerId = 99;
+        int bookId = 100;
+
+        Review result = reviewRepository.findBYCustomerAndBook(customerId,bookId);
+        assertNull(result);
+    }
+    @Test
+    public void testFindCustomerAndBook(){
+        int customerId = 3;
+        int bookId = 10;
+
+        Review result = reviewRepository.findBYCustomerAndBook(customerId,bookId);
+        assertNotNull(result);
+    }
+
 
     @AfterClass
     public static void tearDownClass() {
