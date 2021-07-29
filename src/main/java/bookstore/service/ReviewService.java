@@ -13,7 +13,7 @@ public interface ReviewService {
 
     List<ReviewServiceModel> findALl();
 
-    void create(double rating, String headline, String comment) throws Exception;
+    void create(double rating, String headline, String comment,Book book,Customer customer) throws Exception;
 
     void delete(int id) throws Exception;
 

@@ -44,14 +44,15 @@ public class WriteReviewServlet extends HttpServlet {
         String headline = req.getParameter("headline");
         String comment = req.getParameter("comment");
         int bookId = Integer.parseInt(req.getParameter("bookId"));
+        Book book = this.bookService.getById(bookId);
         Customer customer = (Customer) req.getSession().getAttribute("loggedCustomer");
         int customerId = customer.getCustomerId();
 
         ReviewServiceModel review = this.reviewService.findBYCustomerAndBook(customerId, bookId);
 
-        if (review != null) {
+        if (review == null) {
             try {
-                this.reviewService.create(rating, headline, comment);
+                this.reviewService.create(rating, headline, comment, book, customer);
                 resp.sendRedirect("/");
             } catch (Exception e) {
                 resp.sendRedirect("/admin/create_customer");
