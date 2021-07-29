@@ -32,9 +32,20 @@ public class WriteReviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int bookId = Integer.parseInt(req.getParameter("book_id"));
         Book book = this.bookService.getById(bookId);
-
         req.setAttribute("book", book);
-        req.getRequestDispatcher("review_form.jsp")
+
+        Customer customer = (Customer) req.getSession().getAttribute("loggedCustomer");
+
+        ReviewServiceModel existReview = this.reviewService.findBYCustomerAndBook(customer.getCustomerId(), bookId);
+
+        String targetPage = "review_form.jsp";
+
+        if (existReview != null) {
+            req.setAttribute("review", existReview);
+            targetPage = "review_info.jsp";
+        }
+
+        req.getRequestDispatcher(targetPage)
                 .forward(req, resp);
     }
 
@@ -43,20 +54,21 @@ public class WriteReviewServlet extends HttpServlet {
         double rating = Double.parseDouble(req.getParameter("rating"));
         String headline = req.getParameter("headline");
         String comment = req.getParameter("comment");
+
         int bookId = Integer.parseInt(req.getParameter("bookId"));
         Book book = this.bookService.getById(bookId);
+        req.getSession().setAttribute("book", book);
+
         Customer customer = (Customer) req.getSession().getAttribute("loggedCustomer");
-        int customerId = customer.getCustomerId();
 
-        ReviewServiceModel review = this.reviewService.findBYCustomerAndBook(customerId, bookId);
 
-        if (review == null) {
-            try {
-                this.reviewService.create(rating, headline, comment, book, customer);
-                resp.sendRedirect("/");
-            } catch (Exception e) {
-                resp.sendRedirect("/admin/create_customer");
-            }
+        try {
+            this.reviewService.create(rating, headline, comment, book, customer);
+            req.getRequestDispatcher("review_done.jsp")
+                    .forward(req, resp);
+        } catch (Exception e) {
+            resp.sendRedirect("/write_review");
         }
+
     }
 }
