@@ -33,6 +33,14 @@ public class Book implements Serializable {
     private Set<Review> reviews;
     private String base64Image;
 
+
+    public Book() {
+    }
+
+    public Book(int bookId) {
+        this.bookId = bookId;
+    }
+
     @Id
     @Column(name = "book_id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -192,12 +200,12 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return bookId == book.bookId && Double.compare(book.price, price) == 0 && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(description, book.description) && Objects.equals(isbn, book.isbn) && Arrays.equals(image, book.image) && Objects.equals(publishDate, book.publishDate) && Objects.equals(lastUpdateTime, book.lastUpdateTime);
+        return bookId == book.bookId && Double.compare(book.price, price) == 0 && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(description, book.description) && Objects.equals(isbn, book.isbn) && Arrays.equals(image, book.image) && Objects.equals(publishDate, book.publishDate) && Objects.equals(lastUpdateTime, book.lastUpdateTime) && Objects.equals(category, book.category) && Objects.equals(ordersDetails, book.ordersDetails) && Objects.equals(reviews, book.reviews) && Objects.equals(base64Image, book.base64Image);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(bookId, title, author, description, isbn, price, publishDate, lastUpdateTime);
+        int result = Objects.hash(bookId, title, author, description, isbn, price, publishDate, lastUpdateTime, category, ordersDetails, reviews, base64Image);
         result = 31 * result + Arrays.hashCode(image);
         return result;
     }
