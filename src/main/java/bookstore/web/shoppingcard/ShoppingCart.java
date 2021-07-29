@@ -29,6 +29,18 @@ public class ShoppingCart {
         return this.cart;
     }
 
+    public double getTotalAmount() {
+        int total = 0;
+
+        for (Book book : cart.keySet()) {
+            int quantity = cart.get(book);
+            double subtotal = quantity * book.getPrice();
+            total += subtotal;
+        }
+
+        return total;
+    }
+
     public int getTotalQuantity() {
         int total = 0;
 
@@ -37,5 +49,9 @@ public class ShoppingCart {
         }
 
         return total;
+    }
+
+    public void clear() {
+        this.cart.clear();
     }
 }
