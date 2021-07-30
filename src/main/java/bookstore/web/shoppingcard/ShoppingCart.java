@@ -51,6 +51,10 @@ public class ShoppingCart {
         return total;
     }
 
+    public int getTotalItems() {
+        return cart.size();
+    }
+
     public void clear() {
         this.cart.clear();
     }

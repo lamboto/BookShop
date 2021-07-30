@@ -1,4 +1,5 @@
 import bookstore.domain.entitites.Book;
+import bookstore.domain.entitites.Review;
 import bookstore.web.shoppingcard.ShoppingCart;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -77,5 +78,16 @@ public class ShoppingCartTest {
     public void testClearShoppingCart() {
         cart.clear();
         assertEquals(0, cart.getTotalQuantity());
+    }
+
+    @Test
+    public void testShoppingCartSize() {
+        Book book3 = new Book(3);
+        cart.addItem(book3);
+        cart.addItem(book3);
+        cart.addItem(book3);
+
+        int totalItems = cart.getTotalItems();
+       assertEquals(2, totalItems);
     }
 }
