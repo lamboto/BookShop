@@ -11,6 +11,11 @@ public class AdminAuthenticationFilter implements Filter {
 
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
 
       /* HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -45,6 +50,10 @@ public class AdminAuthenticationFilter implements Filter {
         }*/
     }
 
+    @Override
+    public void destroy() {
+
+    }
 
 
 }

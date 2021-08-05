@@ -17,7 +17,6 @@ public class ShoppingCartTest {
     public static void setUpBeforeClass() throws Exception {
         cart = new ShoppingCart();
         Book book = new Book(1);
-        book.setPrice(10);
 
         cart.addItem(book);
         cart.addItem(book);
@@ -26,7 +25,6 @@ public class ShoppingCartTest {
 
     @Test
     public void testAddItem() {
-
         Map<Book, Integer> items = cart.getItems();
         int quantity = items.get(new Book(1));
 
@@ -58,7 +56,7 @@ public class ShoppingCartTest {
         cart.addItem(book3);
 
 
-        assertEquals(5, cart.getTotalQuantity());
+        assertEquals(6, cart.getTotalQuantity());
     }
 
     @Test
@@ -70,7 +68,7 @@ public class ShoppingCartTest {
 
     @Test
     public void testGetTotalAmount2() {
-        assertEquals(20.0f, cart.getTotalAmount(), 0.0f);
+        assertEquals(40.0f, cart.getTotalAmount(), 0.0f);
 
     }
 
@@ -88,6 +86,6 @@ public class ShoppingCartTest {
         cart.addItem(book3);
 
         int totalItems = cart.getTotalItems();
-       assertEquals(2, totalItems);
+        assertEquals(2, totalItems);
     }
 }

@@ -44,8 +44,12 @@ public class ShoppingCart {
     public int getTotalQuantity() {
         int total = 0;
 
-        for (Book book : cart.keySet()) {
-            total += cart.get(book);
+        Iterator<Book> iterator = cart.keySet().iterator();
+
+        while (iterator.hasNext()) {
+            Book next = iterator.next();
+            int quantity = cart.get(next);
+            total += quantity;
         }
 
         return total;

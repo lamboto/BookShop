@@ -22,13 +22,13 @@ public class ViewCartServlet extends HttpServlet {
         if (cartObject == null) {
             ShoppingCart shoppingCart = new ShoppingCart();
             req.getSession().setAttribute("cart", shoppingCart);
+
+            BookRepository bookRepository = new BookRepository();
+            Book book1 = bookRepository.get(21);
+
+            shoppingCart.addItem(book1);
         }
 
-        BookService bookService = new BookServiceImpl();
-        Book book = bookService.getById(9);
-
-        ShoppingCart shoppingCart = (ShoppingCart) req.getSession().getAttribute("cart");
-        shoppingCart.addItem(book);
 
         req.getRequestDispatcher("shopping_cart.jsp")
                 .forward(req, resp);
